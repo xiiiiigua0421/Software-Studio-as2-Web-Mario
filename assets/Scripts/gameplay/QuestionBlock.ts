@@ -15,6 +15,9 @@ export default class QuestionBlock extends cc.Component {
     @property(cc.AudioClip)
     itemAppearSfx: cc.AudioClip = null;
 
+    @property
+    scoreValue: number = 50;
+
     private used: boolean = false;
 
     start() {
@@ -35,6 +38,7 @@ export default class QuestionBlock extends cc.Component {
 
         this.used = true;
         this.spawnPowerUp();
+        this.addScore(this.scoreValue);
     }
 
     private wasHitFromBelow(player: cc.Node): boolean {
@@ -68,5 +72,13 @@ export default class QuestionBlock extends cc.Component {
         }
 
         cc.audioEngine.playEffect(clip, false);
+    }
+
+    private addScore(points: number) {
+        const managerNode = cc.find("GameManager");
+        const gameManager = managerNode ? managerNode.getComponent("GameManager") as any : null;
+        if (gameManager && gameManager.addScore) {
+            gameManager.addScore(points);
+        }
     }
 }

@@ -27,6 +27,9 @@ export default class Enemy extends cc.Component {
     @property(cc.AudioClip)
     stompSfx: cc.AudioClip = null;
 
+    @property
+    scoreValue: number = 100;
+
     private body: cc.RigidBody = null;
     private startX: number = 0;
     private moveDir: number = -1;
@@ -80,6 +83,7 @@ export default class Enemy extends cc.Component {
         if (this.isStompedBy(other.node)) {
             playerController.bounceFromEnemy();
             this.playEffect(this.stompSfx);
+            this.addScore(this.scoreValue);
             this.die();
             return;
         }
@@ -137,5 +141,13 @@ export default class Enemy extends cc.Component {
         }
 
         cc.audioEngine.playEffect(clip, false);
+    }
+
+    private addScore(points: number) {
+        const managerNode = cc.find("GameManager");
+        const gameManager = managerNode ? managerNode.getComponent("GameManager") as any : null;
+        if (gameManager && gameManager.addScore) {
+            gameManager.addScore(points);
+        }
     }
 }

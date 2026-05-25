@@ -193,11 +193,40 @@ Implemented in TypeScript:
 
 ## Phase 7: UI
 
-1. Show player life.
-2. Show player score.
-3. Show timer.
-4. Update UI values during gameplay.
-5. Polish menu buttons and game panels.
+Status: TypeScript ready, Cocos UI labels still needed
+
+Codex-owned files:
+
+- [x] `assets/Scripts/GameManager.ts`
+- [x] `assets/Scripts/gameplay/Enemy.ts`
+- [x] `assets/Scripts/gameplay/QuestionBlock.ts`
+- [x] `assets/Scripts/gameplay/PowerUp.ts`
+
+User-owned Cocos GUI setup:
+
+1. In `Game scene`, create three Label nodes under `Canvas`:
+   - `LifeLabel`
+   - `ScoreLabel`
+   - `TimerLabel`
+2. Use Widget or fixed Canvas positions so these labels stay on screen.
+3. In `GameManager`, drag `LifeLabel` into `lifeLabel`.
+4. In `GameManager`, drag `ScoreLabel` into `scoreLabel`.
+5. In `GameManager`, drag `TimerLabel` into `timerLabel`.
+6. Optional: tune score values in Inspector:
+   - Goomba `scoreValue`: `100`
+   - QuestionBlock `scoreValue`: `50`
+   - PowerUp `scoreValue`: `100`
+7. Save and preview `Game scene`.
+
+Implemented in TypeScript:
+
+- Life UI shows `LIFE x3` and updates after damage or falling out of bounds.
+- Score UI shows `SCORE 000000`.
+- Timer UI counts up from `TIME 000`.
+- Stomping Goomba adds score.
+- Hitting a question block from below adds score once.
+- Collecting a mushroom adds score.
+- Missing UI Label references are ignored safely.
 
 ## Phase 8: Appearance Polish
 

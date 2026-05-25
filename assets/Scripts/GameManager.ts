@@ -34,6 +34,21 @@ export default class GameManager extends cc.Component {
     @property(cc.AudioClip)
     deathSfx: cc.AudioClip = null;
 
+    @property(cc.Label)
+    lifeLabel: cc.Label = null;
+
+    @property(cc.Label)
+    scoreLabel: cc.Label = null;
+
+    @property(cc.Label)
+    timerLabel: cc.Label = null;
+
+    @property
+    score: number = 0;
+
+    @property
+    elapsedTime: number = 0;
+
     private spawnPosition: cc.Vec3 = null;
     private playerState: PlayerState = PlayerState.Alive;
 
@@ -50,9 +65,15 @@ export default class GameManager extends cc.Component {
         }
         this.playerState = PlayerState.Alive;
         cc.log("Mario lives: " + this.lives);
+        this.updateAllUI();
     }
 
-    update() {
+    update(dt: number) {
+        if (this.playerState !== PlayerState.GameOver) {
+            this.elapsedTime += dt;
+            this.updateTimerUI();
+        }
+
         if (!this.player || !this.spawnPosition || this.playerState !== PlayerState.Alive) {
             return;
         }
@@ -70,10 +91,20 @@ export default class GameManager extends cc.Component {
         this.loseLifeAndRespawn();
     }
 
+    addScore(points: number) {
+        if (points <= 0) {
+            return;
+        }
+
+        this.score += points;
+        this.updateScoreUI();
+    }
+
     private loseLifeAndRespawn() {
         this.playerState = PlayerState.Dead;
         this.lives = Math.max(0, this.lives - 1);
         this.playEffect(this.deathSfx);
+        this.updateLifeUI();
         cc.log("Mario lives: " + this.lives);
 
         if (this.lives <= 0) {
@@ -117,5 +148,43 @@ export default class GameManager extends cc.Component {
         }
 
         cc.audioEngine.playEffect(clip, false);
+    }
+
+    private updateAllUI() {
+        this.updateLifeUI();
+        this.updateScoreUI();
+        this.updateTimerUI();
+    }
+
+    private updateLifeUI() {
+        if (!this.lifeLabel) {
+            return;
+        }
+
+        this.lifeLabel.string = "LIFE x" + this.lives;
+    }
+
+    private updateScoreUI() {
+        if (!this.scoreLabel) {
+            return;
+        }
+
+        this.scoreLabel.string = "SCORE " + this.formatNumber(this.score, 6);
+    }
+
+    private updateTimerUI() {
+        if (!this.timerLabel) {
+            return;
+        }
+
+        this.timerLabel.string = "TIME " + this.formatNumber(this.elapsedTime, 3);
+    }
+
+    private formatNumber(value: number, digits: number): string {
+        let text = Math.max(0, Math.floor(value)).toString();
+        while (text.length < digits) {
+            text = "0" + text;
+        }
+        return text;
     }
 }

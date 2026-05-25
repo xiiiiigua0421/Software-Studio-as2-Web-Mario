@@ -9,6 +9,9 @@ export default class PowerUp extends cc.Component {
     @property(cc.AudioClip)
     powerUpSfx: cc.AudioClip = null;
 
+    @property
+    scoreValue: number = 100;
+
     private body: cc.RigidBody = null;
     private collected: boolean = false;
 
@@ -46,6 +49,7 @@ export default class PowerUp extends cc.Component {
         this.collected = true;
         playerController.grow();
         this.playEffect(this.powerUpSfx);
+        this.addScore(this.scoreValue);
         this.node.destroy();
     }
 
@@ -65,5 +69,13 @@ export default class PowerUp extends cc.Component {
         }
 
         cc.audioEngine.playEffect(clip, false);
+    }
+
+    private addScore(points: number) {
+        const managerNode = cc.find("GameManager");
+        const gameManager = managerNode ? managerNode.getComponent("GameManager") as any : null;
+        if (gameManager && gameManager.addScore) {
+            gameManager.addScore(points);
+        }
     }
 }
