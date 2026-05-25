@@ -9,12 +9,23 @@ export default class PlayerController extends cc.Component {
     @property
     jumpSpeed: number = 520;
 
+    @property
+    enemyBounceSpeed: number = 420;
+
+    @property
+    growScale: number = 1.5;
+
     private body: cc.RigidBody = null;
     private moveDir: number = 0;
     private groundContactCount: number = 0;
+    private baseScaleX: number = 1;
+    private baseScaleY: number = 1;
+    private isBig: boolean = false;
 
     onLoad() {
         this.body = this.getComponent(cc.RigidBody);
+        this.baseScaleX = Math.abs(this.node.scaleX);
+        this.baseScaleY = Math.abs(this.node.scaleY);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
     }
@@ -53,6 +64,28 @@ export default class PlayerController extends cc.Component {
         }
         this.moveDir = 0;
         this.groundContactCount = 0;
+    }
+
+    bounceFromEnemy() {
+        if (!this.body) {
+            return;
+        }
+
+        const velocity = this.body.linearVelocity;
+        velocity.y = this.enemyBounceSpeed;
+        this.body.linearVelocity = velocity;
+        this.groundContactCount = 0;
+    }
+
+    grow() {
+        if (this.isBig) {
+            return;
+        }
+
+        this.isBig = true;
+        const direction = this.node.scaleX < 0 ? -1 : 1;
+        this.node.scaleX = this.baseScaleX * this.growScale * direction;
+        this.node.scaleY = this.baseScaleY * this.growScale;
     }
 
     private onKeyDown(event: cc.Event.EventKeyboard) {

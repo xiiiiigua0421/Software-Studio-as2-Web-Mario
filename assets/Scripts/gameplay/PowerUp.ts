@@ -1,28 +1,57 @@
-// Learn TypeScript:
-//  - https://docs.cocos.com/creator/manual/en/scripting/typescript.html
-// Learn Attribute:
-//  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
-
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
-
-    @property(cc.Label)
-    label: cc.Label = null;
+export default class PowerUp extends cc.Component {
 
     @property
-    text: string = 'hello';
+    moveSpeed: number = 80;
 
-    // LIFE-CYCLE CALLBACKS:
+    private body: cc.RigidBody = null;
+    private collected: boolean = false;
 
-    // onLoad () {}
-
-    start () {
-
+    onLoad() {
+        this.body = this.getComponent(cc.RigidBody);
     }
 
-    // update (dt) {}
+    onEnable() {
+        this.collected = false;
+        this.setMoveVelocity();
+    }
+
+    update(dt: number) {
+        if (this.collected) {
+            return;
+        }
+
+        if (this.body) {
+            this.setMoveVelocity();
+        } else {
+            this.node.x += this.moveSpeed * dt;
+        }
+    }
+
+    onBeginContact(contact: cc.PhysicsContact, self: cc.PhysicsCollider, other: cc.PhysicsCollider) {
+        if (this.collected) {
+            return;
+        }
+
+        const playerController = other.node.getComponent("PlayerController") as any;
+        if (!playerController) {
+            return;
+        }
+
+        this.collected = true;
+        playerController.grow();
+        this.node.destroy();
+    }
+
+    private setMoveVelocity() {
+        if (!this.body) {
+            return;
+        }
+
+        const velocity = this.body.linearVelocity;
+        velocity.x = this.moveSpeed;
+        this.body.linearVelocity = velocity;
+    }
 }

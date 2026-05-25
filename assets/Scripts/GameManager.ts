@@ -55,6 +55,14 @@ export default class GameManager extends cc.Component {
         }
     }
 
+    hurtPlayer() {
+        if (this.playerState !== PlayerState.Alive) {
+            return;
+        }
+
+        this.loseLifeAndRespawn();
+    }
+
     private loseLifeAndRespawn() {
         this.playerState = PlayerState.Dead;
         this.lives = Math.max(0, this.lives - 1);
@@ -66,10 +74,14 @@ export default class GameManager extends cc.Component {
         }
 
         this.playerState = PlayerState.Respawning;
-        this.scheduleOnce(this.respawnPlayer, this.respawnDelay);
+        this.scheduleOnce(() => this.respawnPlayer(), this.respawnDelay);
     }
 
     private respawnPlayer() {
+        if (!this.player || !this.spawnPosition) {
+            return;
+        }
+
         this.player.setPosition(this.spawnPosition);
         const controller = this.player.getComponent("PlayerController") as any;
         if (controller && controller.resetMotion) {

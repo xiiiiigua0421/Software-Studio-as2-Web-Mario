@@ -83,29 +83,56 @@ Implemented in TypeScript:
 
 ## Phase 4: Basic Rules
 
-1. World map:
-   - Correct physics properties
-   - Objects fall due to gravity
-   - Objects collide correctly
-   - Background and camera move according to player position
-   - At least one world map
-2. Level design:
-   - Static walls/platforms
-   - Question blocks that interact with the player
-3. Player:
-   - Correct physics properties
-   - Keyboard movement and jump
-   - Gets hurt or loses life when touching enemies incorrectly
-   - Loses life when out of bounds
-   - Reborns at the initial position after death
-4. Enemies:
-   - At least one enemy type
-   - Correct physics properties
-   - Player can kill enemy only by hitting its head
-5. Question blocks:
-   - At least one type
-   - Example: super mushroom that makes Mario bigger
-   - Correct interaction with player
+Status: TypeScript ready, Cocos gameplay objects still need scene setup
+
+Codex-owned files:
+
+- [x] `assets/Scripts/GameManager.ts`
+- [x] `assets/Scripts/PlayerController.ts`
+- [x] `assets/Scripts/gameplay/Enemy.ts`
+- [x] `assets/Scripts/gameplay/QuestionBlock.ts`
+- [x] `assets/Scripts/gameplay/PowerUp.ts`
+
+User-owned Cocos GUI setup:
+
+1. Finish the Phase 2 world map setup:
+   - At least one playable map
+   - Static ground, walls, and platforms
+   - Correct `RigidBody` and `PhysicsBoxCollider` settings
+   - `GameManager.player` assigned to Player
+   - Camera follows Player
+2. Add one Goomba:
+   - Sprite
+   - Dynamic `RigidBody`
+   - `PhysicsBoxCollider`
+   - Contact listener enabled
+   - Attach `Enemy.ts`
+3. Add one question block:
+   - Sprite
+   - Static `RigidBody`
+   - `PhysicsBoxCollider`
+   - Contact listener enabled
+   - Attach `QuestionBlock.ts`
+4. Add one mushroom:
+   - Sprite
+   - Dynamic `RigidBody`
+   - `PhysicsBoxCollider`
+   - Contact listener enabled
+   - Attach `PowerUp.ts`
+   - Set inactive by default
+   - Drag this mushroom into `QuestionBlock.powerUpNode`
+
+Implemented in TypeScript:
+
+- `GameManager.hurtPlayer()` for enemy damage.
+- Player can bounce after stomping enemies.
+- Player can grow after collecting a mushroom.
+- Goomba patrols left and right.
+- Stomping Goomba destroys it.
+- Touching Goomba from the side hurts the player.
+- Question block triggers only once when hit from below.
+- Question block activates and positions its mushroom.
+- Mushroom moves right and grows the player when collected.
 
 ## Phase 5: Animations
 
