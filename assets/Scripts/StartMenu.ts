@@ -1,28 +1,12 @@
-// Learn TypeScript:
-//  - https://docs.cocos.com/creator/manual/en/scripting/typescript.html
-// Learn Attribute:
-//  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
-
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
-
-    @property(cc.Label)
-    label: cc.Label = null;
+export default class StartMenu extends cc.Component {
 
     @property
-    text: string = 'hello';
+    levelSelectScene: string = "Level select";
 
-    // LIFE-CYCLE CALLBACKS:
-
-    // onLoad () {}
-
-    start () {
-
+    goToLevelSelect() {
+        cc.director.loadScene(this.levelSelectScene);
     }
-
-    // update (dt) {}
 }

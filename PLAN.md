@@ -53,16 +53,33 @@ Implemented in TypeScript:
 
 ## Phase 3: Game Process
 
-1. Start from the start menu.
-2. Enter level select.
-3. Start the selected level.
-4. Track current player status:
-   - Alive
-   - Hurt
-   - Dead
-   - Respawning
-   - Game over
-5. Return to menu or restart after game over.
+Status: TypeScript ready, Cocos button wiring still needed
+
+Codex-owned files:
+
+- [x] `assets/Scripts/StartMenu.ts`
+- [x] `assets/Scripts/LevelSelect.ts`
+- [x] `assets/Scripts/GameOver.ts`
+- [x] `assets/Scripts/GameManager.ts`
+
+User-owned Cocos GUI setup:
+
+1. In `Start menu`, attach `StartMenu.ts` and wire the Start button to `goToLevelSelect`.
+2. In `Level select`, attach `LevelSelect.ts` and wire the Level 1 button to `startLevelOne`.
+3. In `Game scene`, keep `GameManager.ts` attached and drag `Player` into its `player` field.
+4. In `Game over`, attach `GameOver.ts`.
+5. Wire the Restart button to `restartLevel`.
+6. Wire the Menu button to `goToStartMenu`.
+7. Confirm all four scenes are added to Build Settings.
+
+Implemented in TypeScript:
+
+- Start menu loads `Level select`.
+- Level select loads `Game scene`.
+- Game over can restart `Game scene`.
+- Game over can return to `Start menu`.
+- `GameManager` tracks `Alive`, `Dead`, `Respawning`, and `GameOver`.
+- When lives reach 0, `GameManager` loads `Game over`.
 
 ## Phase 4: Basic Rules
 

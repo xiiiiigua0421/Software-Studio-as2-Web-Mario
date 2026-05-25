@@ -1,28 +1,19 @@
-// Learn TypeScript:
-//  - https://docs.cocos.com/creator/manual/en/scripting/typescript.html
-// Learn Attribute:
-//  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
-
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
-
-    @property(cc.Label)
-    label: cc.Label = null;
+export default class GameOver extends cc.Component {
 
     @property
-    text: string = 'hello';
+    gameScene: string = "Game scene";
 
-    // LIFE-CYCLE CALLBACKS:
+    @property
+    startMenuScene: string = "Start menu";
 
-    // onLoad () {}
-
-    start () {
-
+    restartLevel() {
+        cc.director.loadScene(this.gameScene);
     }
 
-    // update (dt) {}
+    goToStartMenu() {
+        cc.director.loadScene(this.startMenuScene);
+    }
 }
