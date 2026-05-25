@@ -237,17 +237,25 @@ Implemented in TypeScript:
 
 ## Phase 9: README And AI Report
 
-1. Create or update `README.md`.
-2. List completed scoring items.
-3. Describe extra functions or bonus features.
-4. If AI tools were used, create `AI_reference.pdf` in the project root.
-5. In `AI_reference.pdf`, include:
-   - AI tools used
-   - Scope of usage
-   - File names and line numbers
-   - Prompt and response records
-   - Modified version and explanation
-6. If no AI tools were used, state that no AI tools were used.
+Status: Markdown docs ready, PDF export still user-owned if required
+
+Codex-owned files:
+
+- [x] `README.md`
+- [x] `AI_reference.md`
+- [x] `PLAN.md`
+
+User-owned follow-up:
+
+1. Review `README.md` and update any final Firebase URL, student ID, or packaging details.
+2. If the TA requires PDF, export `AI_reference.md` to `AI_reference.pdf`.
+3. Visually check the exported PDF before final packaging.
+4. Keep `AI_reference.pdf if AI tools are used` unchecked until the PDF exists.
+
+Implemented in Markdown:
+
+- `README.md` lists project overview, controls, implemented TypeScript features, Cocos Editor setup still needed, and submission placeholders.
+- `AI_reference.md` records AI tool usage, scope, file references with line numbers, summarized prompt/response records, and version/modification records.
 
 ## Phase 10: Deployment
 
@@ -314,7 +322,7 @@ Implemented in TypeScript:
 - [ ] Score UI
 - [ ] Timer UI
 - [ ] Appearance polish
-- [ ] README.md with completed items and extra features
+- [x] README.md with completed items and extra features
 - [ ] AI_reference.pdf if AI tools are used
 - [ ] Firebase deployment
 - [ ] Build output includes `index.html`
