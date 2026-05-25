@@ -28,6 +28,12 @@ export default class GameManager extends cc.Component {
     @property
     gameOverScene: string = "Game over";
 
+    @property(cc.AudioClip)
+    bgm: cc.AudioClip = null;
+
+    @property(cc.AudioClip)
+    deathSfx: cc.AudioClip = null;
+
     private spawnPosition: cc.Vec3 = null;
     private playerState: PlayerState = PlayerState.Alive;
 
@@ -38,6 +44,7 @@ export default class GameManager extends cc.Component {
     }
 
     start() {
+        this.playBgm();
         if (this.player) {
             this.spawnPosition = this.player.position.clone();
         }
@@ -66,6 +73,7 @@ export default class GameManager extends cc.Component {
     private loseLifeAndRespawn() {
         this.playerState = PlayerState.Dead;
         this.lives = Math.max(0, this.lives - 1);
+        this.playEffect(this.deathSfx);
         cc.log("Mario lives: " + this.lives);
 
         if (this.lives <= 0) {
@@ -93,5 +101,21 @@ export default class GameManager extends cc.Component {
     private enterGameOver() {
         this.playerState = PlayerState.GameOver;
         cc.director.loadScene(this.gameOverScene);
+    }
+
+    private playBgm() {
+        if (!this.bgm) {
+            return;
+        }
+
+        cc.audioEngine.playMusic(this.bgm, true);
+    }
+
+    private playEffect(clip: cc.AudioClip) {
+        if (!clip) {
+            return;
+        }
+
+        cc.audioEngine.playEffect(clip, false);
     }
 }

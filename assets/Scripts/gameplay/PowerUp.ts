@@ -6,6 +6,9 @@ export default class PowerUp extends cc.Component {
     @property
     moveSpeed: number = 80;
 
+    @property(cc.AudioClip)
+    powerUpSfx: cc.AudioClip = null;
+
     private body: cc.RigidBody = null;
     private collected: boolean = false;
 
@@ -42,6 +45,7 @@ export default class PowerUp extends cc.Component {
 
         this.collected = true;
         playerController.grow();
+        this.playEffect(this.powerUpSfx);
         this.node.destroy();
     }
 
@@ -53,5 +57,13 @@ export default class PowerUp extends cc.Component {
         const velocity = this.body.linearVelocity;
         velocity.x = this.moveSpeed;
         this.body.linearVelocity = velocity;
+    }
+
+    private playEffect(clip: cc.AudioClip) {
+        if (!clip) {
+            return;
+        }
+
+        cc.audioEngine.playEffect(clip, false);
     }
 }

@@ -136,25 +136,60 @@ Implemented in TypeScript:
 
 ## Phase 5: Animations
 
-1. Player idle animation.
-2. Player walking animation.
-3. Player jumping animation.
-4. Enemy animation.
-5. Optional item/effect animations for better appearance.
+Status: TypeScript hooks ready, Cocos animation clips still needed
+
+Codex-owned files:
+
+- [x] `assets/Scripts/PlayerController.ts`
+- [x] `assets/Scripts/gameplay/Enemy.ts`
+
+User-owned Cocos GUI setup:
+
+1. Create `player_idle`, `player_walk`, and `player_jump` animation clips.
+2. Add a `cc.Animation` component to `Player`.
+3. Add the player clips to the `Player` animation component.
+4. Create `goomba_walk` animation clip.
+5. Optional: create `goomba_die` animation clip.
+6. Add a `cc.Animation` component to the Goomba node.
+7. Add the Goomba clips to the Goomba animation component.
+8. Save and preview `Game scene`.
+
+Implemented in TypeScript:
+
+- Player switches between idle, walk, and jump clips from movement and grounded state.
+- Jump animation plays immediately after a valid jump.
+- Goomba plays its walk clip on start.
+- Goomba can play an optional death clip before being destroyed.
+- Missing animation components or clip names are ignored safely.
 
 ## Phase 6: Sound Effects
 
-1. Add at least one BGM.
-2. Add player jump sound effect.
-3. Add player death sound effect.
-4. Add extra sound effects if possible:
-   - Coin
-   - Stomp
-   - Item appear
-   - Power up
-   - Power down
-   - Level clear
-5. Make sure sound effects do not stop the BGM.
+Status: TypeScript hooks ready, Cocos audio assignment still needed
+
+Codex-owned files:
+
+- [x] `assets/Scripts/GameManager.ts`
+- [x] `assets/Scripts/PlayerController.ts`
+- [x] `assets/Scripts/gameplay/Enemy.ts`
+- [x] `assets/Scripts/gameplay/QuestionBlock.ts`
+- [x] `assets/Scripts/gameplay/PowerUp.ts`
+
+User-owned Cocos GUI setup:
+
+1. In `GameManager`, drag a BGM clip such as `bgm_1.mp3` into `bgm`.
+2. In `GameManager`, drag `loseOneLife.wav` into `deathSfx`.
+3. In `PlayerController`, drag `jump.wav` into `jumpSfx`.
+4. In `Enemy`, drag `stomp.wav` into `stompSfx`.
+5. In `QuestionBlock`, drag `powerUpAppear.wav` into `itemAppearSfx`.
+6. In `PowerUp`, drag `PowerUp.mp3` into `powerUpSfx`.
+7. Save and preview `Game scene`.
+
+Implemented in TypeScript:
+
+- BGM plays through `cc.audioEngine.playMusic(clip, true)`.
+- Jump, death, stomp, item appear, and power-up sound effects use `playEffect`.
+- Sound effects do not stop the BGM.
+- Missing audio clips are ignored safely.
 
 ## Phase 7: UI
 

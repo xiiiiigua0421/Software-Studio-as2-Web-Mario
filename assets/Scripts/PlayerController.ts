@@ -15,15 +15,34 @@ export default class PlayerController extends cc.Component {
     @property
     growScale: number = 1.5;
 
+    @property(cc.Animation)
+    playerAnimation: cc.Animation = null;
+
+    @property
+    idleClipName: string = "player_idle";
+
+    @property
+    walkClipName: string = "player_walk";
+
+    @property
+    jumpClipName: string = "player_jump";
+
+    @property(cc.AudioClip)
+    jumpSfx: cc.AudioClip = null;
+
     private body: cc.RigidBody = null;
     private moveDir: number = 0;
     private groundContactCount: number = 0;
     private baseScaleX: number = 1;
     private baseScaleY: number = 1;
     private isBig: boolean = false;
+    private currentAnimationName: string = "";
 
     onLoad() {
         this.body = this.getComponent(cc.RigidBody);
+        if (!this.playerAnimation) {
+            this.playerAnimation = this.getComponent(cc.Animation);
+        }
         this.baseScaleX = Math.abs(this.node.scaleX);
         this.baseScaleY = Math.abs(this.node.scaleY);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
@@ -47,6 +66,8 @@ export default class PlayerController extends cc.Component {
         if (this.moveDir !== 0) {
             this.node.scaleX = Math.abs(this.node.scaleX) * (this.moveDir > 0 ? 1 : -1);
         }
+
+        this.updateAnimation();
     }
 
     onBeginContact() {
@@ -64,6 +85,7 @@ export default class PlayerController extends cc.Component {
         }
         this.moveDir = 0;
         this.groundContactCount = 0;
+        this.playAnimation(this.idleClipName);
     }
 
     bounceFromEnemy() {
@@ -132,5 +154,43 @@ export default class PlayerController extends cc.Component {
         velocity.y = this.jumpSpeed;
         this.body.linearVelocity = velocity;
         this.groundContactCount = 0;
+        this.playEffect(this.jumpSfx);
+        this.playAnimation(this.jumpClipName);
+    }
+
+    private updateAnimation() {
+        if (this.groundContactCount <= 0) {
+            this.playAnimation(this.jumpClipName);
+            return;
+        }
+
+        if (this.moveDir !== 0) {
+            this.playAnimation(this.walkClipName);
+            return;
+        }
+
+        this.playAnimation(this.idleClipName);
+    }
+
+    private playAnimation(clipName: string) {
+        if (!this.playerAnimation || !clipName || this.currentAnimationName === clipName) {
+            return;
+        }
+
+        const state = this.playerAnimation.getAnimationState(clipName);
+        if (!state) {
+            return;
+        }
+
+        this.playerAnimation.play(clipName);
+        this.currentAnimationName = clipName;
+    }
+
+    private playEffect(clip: cc.AudioClip) {
+        if (!clip) {
+            return;
+        }
+
+        cc.audioEngine.playEffect(clip, false);
     }
 }

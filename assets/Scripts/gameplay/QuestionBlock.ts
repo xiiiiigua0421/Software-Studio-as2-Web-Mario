@@ -12,6 +12,9 @@ export default class QuestionBlock extends cc.Component {
     @property
     spawnPadding: number = 4;
 
+    @property(cc.AudioClip)
+    itemAppearSfx: cc.AudioClip = null;
+
     private used: boolean = false;
 
     start() {
@@ -56,5 +59,14 @@ export default class QuestionBlock extends cc.Component {
 
         this.powerUpNode.setPosition(localPosition);
         this.powerUpNode.active = true;
+        this.playEffect(this.itemAppearSfx);
+    }
+
+    private playEffect(clip: cc.AudioClip) {
+        if (!clip) {
+            return;
+        }
+
+        cc.audioEngine.playEffect(clip, false);
     }
 }

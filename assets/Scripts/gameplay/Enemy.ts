@@ -12,14 +12,37 @@ export default class Enemy extends cc.Component {
     @property
     stompTolerance: number = 8;
 
+    @property(cc.Animation)
+    enemyAnimation: cc.Animation = null;
+
+    @property
+    walkClipName: string = "goomba_walk";
+
+    @property
+    deathClipName: string = "goomba_die";
+
+    @property
+    deathDestroyDelay: number = 0.2;
+
+    @property(cc.AudioClip)
+    stompSfx: cc.AudioClip = null;
+
     private body: cc.RigidBody = null;
     private startX: number = 0;
     private moveDir: number = -1;
     private isDead: boolean = false;
+    private currentAnimationName: string = "";
 
     onLoad() {
         this.body = this.getComponent(cc.RigidBody);
+        if (!this.enemyAnimation) {
+            this.enemyAnimation = this.getComponent(cc.Animation);
+        }
         this.startX = this.node.x;
+    }
+
+    start() {
+        this.playAnimation(this.walkClipName);
     }
 
     update(dt: number) {
@@ -56,6 +79,7 @@ export default class Enemy extends cc.Component {
 
         if (this.isStompedBy(other.node)) {
             playerController.bounceFromEnemy();
+            this.playEffect(this.stompSfx);
             this.die();
             return;
         }
@@ -83,6 +107,35 @@ export default class Enemy extends cc.Component {
         if (this.body) {
             this.body.linearVelocity = cc.v2(0, 0);
         }
+
+        if (this.playAnimation(this.deathClipName)) {
+            this.scheduleOnce(() => this.node.destroy(), this.deathDestroyDelay);
+            return;
+        }
+
         this.node.destroy();
+    }
+
+    private playAnimation(clipName: string): boolean {
+        if (!this.enemyAnimation || !clipName || this.currentAnimationName === clipName) {
+            return false;
+        }
+
+        const state = this.enemyAnimation.getAnimationState(clipName);
+        if (!state) {
+            return false;
+        }
+
+        this.enemyAnimation.play(clipName);
+        this.currentAnimationName = clipName;
+        return true;
+    }
+
+    private playEffect(clip: cc.AudioClip) {
+        if (!clip) {
+            return;
+        }
+
+        cc.audioEngine.playEffect(clip, false);
     }
 }
