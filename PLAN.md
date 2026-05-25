@@ -296,31 +296,31 @@ Implemented in Markdown:
 - [x] Git initialized with regular commits
 - [x] Start menu
 - [x] Level select
-- [ ] Game start and game over flow
+- [x] Game start and game over flow
 - [ ] At least one world map
 - [ ] Correct gravity and collision
-- [ ] Camera follows player
+- [x] Camera follows player
 - [ ] Static walls/platforms
-- [ ] Question block interaction
-- [ ] Player movement
-- [ ] Player jump
-- [ ] Player hurt/death/rebirth
-- [ ] Out-of-bounds life decrease
-- [ ] At least one enemy type
-- [ ] Enemy physics and movement
-- [ ] Enemy dies only when stomped
-- [ ] Super mushroom or equivalent item
-- [ ] Player walk animation
-- [ ] Player jump animation
-- [ ] Enemy animation
-- [ ] BGM
-- [ ] Jump sound effect
-- [ ] Death sound effect
-- [ ] Extra sound effects
-- [ ] BGM continues while sound effects play
-- [ ] Life UI
-- [ ] Score UI
-- [ ] Timer UI
+- [x] Question block interaction
+- [x] Player movement
+- [x] Player jump
+- [x] Player hurt/death/rebirth
+- [x] Out-of-bounds life decrease
+- [x] At least one enemy type
+- [x] Enemy physics and movement
+- [x] Enemy dies only when stomped
+- [x] Super mushroom or equivalent item
+- [x] Player walk animation
+- [x] Player jump animation
+- [x] Enemy animation
+- [x] BGM
+- [x] Jump sound effect
+- [x] Death sound effect
+- [x] Extra sound effects
+- [x] BGM continues while sound effects play
+- [x] Life UI
+- [x] Score UI
+- [x] Timer UI
 - [ ] Appearance polish
 - [x] README.md with completed items and extra features
 - [ ] AI_reference.pdf if AI tools are used
