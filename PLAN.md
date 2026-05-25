@@ -22,17 +22,34 @@ Commit: `334279d Set up initial Cocos scenes`
 
 ## Phase 2: Minimum Playable Game
 
+Status: TypeScript ready, Cocos scene setup still needed
+
+Codex-owned files:
+
+- [x] `assets/Scripts/PlayerController.ts`
+- [x] `assets/Scripts/GameManager.ts`
+- [x] `assets/Scripts/CameraFollow.ts`
+
+User-owned Cocos GUI setup:
+
 1. Build the game scene with one simple map.
 2. Add static ground, walls, and platforms.
-3. Enable gravity and collision.
+3. Enable gravity and collision through scene components.
 4. Add the player character.
-5. Implement keyboard controls:
-   - Move left
-   - Move right
-   - Jump
-6. Make the camera follow the player.
-7. Add bounds detection so the player loses life after falling out of the map.
-8. Add player respawn at the initial position.
+5. Attach `PlayerController` to `Player`.
+6. Attach `GameManager` to a `GameManager` node and drag `Player` into its `player` field.
+7. Attach `CameraFollow` to `Main Camera` and drag `Player` into its `target` field.
+8. Add bounds testing by using `GameManager.deathY`.
+9. Save and preview `Game scene`.
+
+Implemented in TypeScript:
+
+- Keyboard movement: `A`, `D`, left arrow, right arrow.
+- Jump: `W`, up arrow, space.
+- No infinite jump while airborne.
+- Camera follows player on X axis.
+- Physics manager is enabled with gravity.
+- Falling below `deathY` decreases lives and respawns the player.
 
 ## Phase 3: Game Process
 
