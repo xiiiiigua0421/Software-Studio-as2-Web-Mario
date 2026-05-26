@@ -5,6 +5,71 @@ Deadline: 2026/05/28 23:59
 This file saves the full assignment workflow, from project setup to final
 submission. Use the checklist at the bottom to track progress.
 
+## Cocos Node Architecture
+
+This section records the target Cocos Editor node hierarchy. User-owned scene
+setup should follow these paths when creating nodes, attaching components, and
+dragging Inspector references.
+
+Start menu:
+
+```text
+Canvas
+  Main Camera
+  Background
+  Title
+  StartButton
+  StartMenu
+```
+
+Level select:
+
+```text
+Canvas
+  Main Camera
+  Background
+  Title
+  LevelButtons
+    Level1Button
+  LevelSelect
+```
+
+Game scene:
+
+```text
+Canvas
+  Main Camera
+  World
+    Background
+    Ground
+    Platform
+    Player
+    Enemies
+      Goomba
+    Blocks
+      QuestionBlock
+    Items
+      Mushroom
+  UI
+    LifeLabel
+    ScoreLabel
+    TimerLabel
+  GameManager
+```
+
+Game over:
+
+```text
+Canvas
+  Main Camera
+  Background
+  Title
+  FinalScoreLabel
+  RestartButton
+  MenuButton
+  GameOver
+```
+
 ## Phase 1: Project Setup
 
 Status: Done
