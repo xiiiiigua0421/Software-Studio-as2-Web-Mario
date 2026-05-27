@@ -4,7 +4,7 @@ const {ccclass, property} = cc._decorator;
 export default class PlayerController extends cc.Component {
 
     @property
-    moveSpeed: number = 220;
+    moveSpeed: number = 110;
 
     @property
     jumpSpeed: number = 520;

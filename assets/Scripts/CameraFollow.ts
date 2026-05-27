@@ -7,7 +7,7 @@ export default class CameraFollow extends cc.Component {
     target: cc.Node = null;
 
     @property
-    minX: number = 0;
+    minX: number = -cc.winSize.width / 2;
 
     @property
     smooth: number = 0.15;
@@ -23,7 +23,7 @@ export default class CameraFollow extends cc.Component {
             return;
         }
 
-        const targetX = Math.max(this.minX, this.target.x);
+        const targetX = Math.max(this.minX, this.target.x - cc.winSize.width / 2);
         const nextX = this.node.x + (targetX - this.node.x) * this.smooth;
         this.node.setPosition(nextX, this.fixedY);
     }
