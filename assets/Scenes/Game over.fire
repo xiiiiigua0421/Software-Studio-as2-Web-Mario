@@ -454,14 +454,14 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 117,
+      "g": 249,
+      "b": 210,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 300,
+      "width": 364.5,
       "height": 40
     },
     "_anchorPoint": {
@@ -519,10 +519,10 @@
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": {
-      "__uuid__": "14fc7511-9e26-444e-b2d2-226188322617"
+      "__uuid__": "22518c90-d82c-4d5e-bc67-98271d34400d"
     },
     "_isSystemFontUsed": false,
-    "_spacingX": 0,
+    "_spacingX": 8,
     "_batchAsBitmap": false,
     "_styleFlags": 0,
     "_underlineHeight": 0,
@@ -1360,6 +1360,8 @@
     "finalScoreLabel": {
       "__id__": 10
     },
+    "finalTimeLabel": null,
+    "nameEditBox": null,
     "_id": "cfEn+U9IhFALxInyTNUBEk"
   }
 ]

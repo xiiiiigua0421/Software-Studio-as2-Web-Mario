@@ -11,7 +11,7 @@ enum PlayerState {
 @ccclass
 export default class GameManager extends cc.Component {
 
-    private static readonly FinalScoreKey: string = "web_mario_final_score";
+    private static readonly LastResultKey: string = "web_mario_last_result";
 
     @property(cc.Node)
     player: cc.Node = null;
@@ -113,7 +113,7 @@ export default class GameManager extends cc.Component {
         }
 
         this.playerState = PlayerState.Finished;
-        this.saveFinalScore();
+        this.saveLastResult(true);
         cc.director.loadScene(this.gameOverScene);
     }
 
@@ -148,12 +148,18 @@ export default class GameManager extends cc.Component {
 
     private enterGameOver() {
         this.playerState = PlayerState.GameOver;
-        this.saveFinalScore();
+        this.saveLastResult(false);
         cc.director.loadScene(this.gameOverScene);
     }
 
-    private saveFinalScore() {
-        cc.sys.localStorage.setItem(GameManager.FinalScoreKey, Math.floor(this.score).toString());
+    private saveLastResult(finished: boolean) {
+        const result = {
+            score: Math.floor(this.score),
+            time: Math.floor(this.elapsedTime),
+            finished: finished,
+        };
+
+        cc.sys.localStorage.setItem(GameManager.LastResultKey, JSON.stringify(result));
     }
 
     private startMovingPlatform() {

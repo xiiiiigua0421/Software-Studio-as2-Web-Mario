@@ -18,6 +18,7 @@ Canvas
   Main Camera
   Background
   Title
+  LeaderboardLabel
   StartButton
   StartMenu
 ```
@@ -67,6 +68,9 @@ Canvas
   Background
   Title
   FinalScoreLabel
+  FinalTimeLabel
+  NameEditBox
+  SubmitButton
   RestartButton
   MenuButton
   GameOver
@@ -132,14 +136,18 @@ Codex-owned files:
 User-owned Cocos GUI setup:
 
 1. In `Start menu`, attach `StartMenu.ts` and wire the Start button to `goToLevelSelect`.
-2. In `Level select`, attach `LevelSelect.ts` and wire the Level 1 button to `startLevelOne`.
-3. In `Game scene`, keep `GameManager.ts` attached and drag `Player` into its `player` field.
-4. Optional but recommended: create a finish trigger node with a Sensor collider and tag `20`.
-5. In `Game over`, attach `GameOver.ts`.
-6. Drag `FinalScoreLabel` into `GameOver.finalScoreLabel`.
-7. Wire the Restart button to `restartLevel`.
-8. Wire the Menu button to `goToStartMenu`.
-9. Confirm all four scenes are added to Build Settings.
+2. Create `LeaderboardLabel` and drag it into `StartMenu.leaderboardLabel`.
+3. In `Level select`, attach `LevelSelect.ts` and wire the Level 1 button to `startLevelOne`.
+4. In `Game scene`, keep `GameManager.ts` attached and drag `Player` into its `player` field.
+5. Optional but recommended: create a finish trigger node with a Sensor collider and tag `20`.
+6. In `Game over`, attach `GameOver.ts`.
+7. Drag `FinalScoreLabel` into `GameOver.finalScoreLabel`.
+8. Drag `FinalTimeLabel` into `GameOver.finalTimeLabel`.
+9. Drag `NameEditBox` into `GameOver.nameEditBox`.
+10. Wire the Submit button to `submitScore`.
+11. Wire the Restart button to `restartLevel`.
+12. Wire the Menu button to `goToStartMenu`.
+13. Confirm all four scenes are added to Build Settings.
 
 Implemented in TypeScript:
 
@@ -147,10 +155,13 @@ Implemented in TypeScript:
 - Level select loads `Game scene`.
 - Game over can restart `Game scene`.
 - Game over can return to `Start menu`.
-- Game over displays the final score from the previous run.
+- Game over displays the final score and final time from the previous run.
+- Game over can submit a player name after a finished run.
+- Start menu displays a Top 5 leaderboard from local storage.
 - `GameManager` tracks `Alive`, `Dead`, `Respawning`, and `GameOver`.
 - When lives reach 0, `GameManager` loads `Game over`.
 - Player contact with finish tag `20` calls `GameManager.finishLevel()` and loads `Game over`.
+- Leaderboard sorts by score descending, then time ascending.
 
 ## Phase 4: Basic Rules
 
@@ -399,6 +410,8 @@ Implemented in Markdown:
 - [x] Life UI
 - [x] Score UI
 - [x] Timer UI
+- [x] Start menu leaderboard
+- [x] Game over name input for finished runs
 - [ ] Appearance polish
 - [x] README.md with completed items and extra features
 - [ ] AI_reference.pdf if AI tools are used
