@@ -18,6 +18,9 @@ export default class PlayerController extends cc.Component {
     @property
     groundSensorTag: number = 10;
 
+    @property
+    finishTag: number = 20;
+
     @property(cc.Animation)
     playerAnimation: cc.Animation = null;
 

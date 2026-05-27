@@ -20,7 +20,7 @@ export default class GameManager extends cc.Component {
     deathY: number = -260;
 
     @property
-    gravityY: number = -1200;
+    gravityY: number = -800;
 
     @property
     respawnDelay: number = 0.5;
