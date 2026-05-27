@@ -32,7 +32,7 @@ export default class GameOver extends cc.Component {
         }
 
         const scoreText = cc.sys.localStorage.getItem(GameOver.FinalScoreKey) || "0";
-        this.finalScoreLabel.string = "FINAL SCORE " + this.formatNumber(Number(scoreText), 6);
+        this.finalScoreLabel.string = "FINAL SCORE " + this.formatNumber(Number(scoreText), 0);
     }
 
     private formatNumber(value: number, digits: number): string {

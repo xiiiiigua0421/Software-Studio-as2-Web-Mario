@@ -43,6 +43,7 @@ Canvas
     Background
     Ground
     Platform
+      MovingPlatform
     Player
     Enemies
       Goomba
@@ -55,7 +56,7 @@ Canvas
     LifeLabel
     ScoreLabel
     TimerLabel
-  GameManager
+GameManager
 ```
 
 Game over:
@@ -304,6 +305,12 @@ Implemented in TypeScript:
 2. Place enemies, question blocks, and items in reasonable positions.
 3. Check player, enemy, UI, and background visibility.
 4. Make the game look complete enough for subjective appearance grading.
+5. Optional: drag `MovingPlatform` into `GameManager.movingPlatform` for a looping horizontal platform.
+
+Implemented in TypeScript:
+
+- `GameManager` can move one optional platform right `32` pixels, then left `32` pixels, forever.
+- The moving platform uses fixed `cc.moveBy(1.5, cc.v2(32, 0))` values in TypeScript.
 
 ## Phase 9: README And AI Report
 

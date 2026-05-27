@@ -28,6 +28,9 @@ export default class GameManager extends cc.Component {
     @property
     respawnDelay: number = 0.5;
 
+    @property(cc.Node)
+    movingPlatform: cc.Node = null;
+
     @property
     gameOverScene: string = "Game over";
 
@@ -63,6 +66,7 @@ export default class GameManager extends cc.Component {
 
     start() {
         this.playBgm();
+        this.startMovingPlatform();
         if (this.player) {
             this.spawnPosition = this.player.position.clone();
         }
@@ -150,6 +154,19 @@ export default class GameManager extends cc.Component {
 
     private saveFinalScore() {
         cc.sys.localStorage.setItem(GameManager.FinalScoreKey, Math.floor(this.score).toString());
+    }
+
+    private startMovingPlatform() {
+        if (!this.movingPlatform) {
+            return;
+        }
+
+        const moveRight = cc.moveBy(1.5, cc.v2(64, 0)).easing(cc.easeInOut(2));
+        const moveLeft = cc.moveBy(1.5, cc.v2(-64, 0)).easing(cc.easeInOut(2));
+        const loop = cc.repeatForever(cc.sequence(moveRight, moveLeft));
+
+        this.movingPlatform.stopAllActions();
+        this.movingPlatform.runAction(loop);
     }
 
     private playBgm() {
