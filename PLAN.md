@@ -50,6 +50,7 @@ Canvas
       QuestionBlock
     Items
       Mushroom
+    Finish
   UI
     LifeLabel
     ScoreLabel
@@ -132,10 +133,11 @@ User-owned Cocos GUI setup:
 1. In `Start menu`, attach `StartMenu.ts` and wire the Start button to `goToLevelSelect`.
 2. In `Level select`, attach `LevelSelect.ts` and wire the Level 1 button to `startLevelOne`.
 3. In `Game scene`, keep `GameManager.ts` attached and drag `Player` into its `player` field.
-4. In `Game over`, attach `GameOver.ts`.
-5. Wire the Restart button to `restartLevel`.
-6. Wire the Menu button to `goToStartMenu`.
-7. Confirm all four scenes are added to Build Settings.
+4. Optional but recommended: create a finish trigger node with a Sensor collider and tag `20`.
+5. In `Game over`, attach `GameOver.ts`.
+6. Wire the Restart button to `restartLevel`.
+7. Wire the Menu button to `goToStartMenu`.
+8. Confirm all four scenes are added to Build Settings.
 
 Implemented in TypeScript:
 
@@ -145,6 +147,7 @@ Implemented in TypeScript:
 - Game over can return to `Start menu`.
 - `GameManager` tracks `Alive`, `Dead`, `Respawning`, and `GameOver`.
 - When lives reach 0, `GameManager` loads `Game over`.
+- Player contact with finish tag `20` calls `GameManager.finishLevel()` and loads `Game over`.
 
 ## Phase 4: Basic Rules
 
@@ -362,6 +365,7 @@ Implemented in Markdown:
 - [x] Start menu
 - [x] Level select
 - [x] Game start and game over flow
+- [x] Finish tag trigger ends the level
 - [ ] At least one world map
 - [ ] Correct gravity and collision
 - [x] Camera follows player

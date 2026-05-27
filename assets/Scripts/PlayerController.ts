@@ -21,6 +21,9 @@ export default class PlayerController extends cc.Component {
     @property
     finishTag: number = 20;
 
+    @property(cc.Node)
+    gameManagerNode: cc.Node = null;
+
     @property(cc.Animation)
     playerAnimation: cc.Animation = null;
 
@@ -76,7 +79,12 @@ export default class PlayerController extends cc.Component {
         this.updateAnimation();
     }
 
-    onBeginContact(contact: cc.PhysicsContact, self: cc.PhysicsCollider) {
+    onBeginContact(contact: cc.PhysicsContact, self: cc.PhysicsCollider, other: cc.PhysicsCollider) {
+        if (this.isFinishCollider(other)) {
+            this.finishLevel();
+            return;
+        }
+
         if (!this.isGroundSensor(self)) {
             return;
         }
@@ -174,6 +182,19 @@ export default class PlayerController extends cc.Component {
 
     private isGroundSensor(collider: cc.PhysicsCollider): boolean {
         return collider && collider.tag === this.groundSensorTag;
+    }
+
+    private isFinishCollider(collider: cc.PhysicsCollider): boolean {
+        return collider && collider.tag === this.finishTag;
+    }
+
+    private finishLevel() {
+        const managerNode = this.gameManagerNode || cc.find("Canvas/GameManager");
+        const manager = managerNode && managerNode.getComponent("GameManager") as any;
+
+        if (manager && manager.finishLevel) {
+            manager.finishLevel();
+        }
     }
 
     private updateAnimation() {

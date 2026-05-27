@@ -4,6 +4,7 @@ enum PlayerState {
     Alive = "Alive",
     Dead = "Dead",
     Respawning = "Respawning",
+    Finished = "Finished",
     GameOver = "GameOver",
 }
 
@@ -98,6 +99,15 @@ export default class GameManager extends cc.Component {
 
         this.score += points;
         this.updateScoreUI();
+    }
+
+    finishLevel() {
+        if (this.playerState !== PlayerState.Alive) {
+            return;
+        }
+
+        this.playerState = PlayerState.Finished;
+        cc.director.loadScene(this.gameOverScene);
     }
 
     private loseLifeAndRespawn() {
