@@ -15,6 +15,9 @@ export default class PlayerController extends cc.Component {
     @property
     growScale: number = 1.5;
 
+    @property
+    groundSensorTag: number = 10;
+
     @property(cc.Animation)
     playerAnimation: cc.Animation = null;
 
@@ -70,11 +73,19 @@ export default class PlayerController extends cc.Component {
         this.updateAnimation();
     }
 
-    onBeginContact() {
+    onBeginContact(contact: cc.PhysicsContact, self: cc.PhysicsCollider) {
+        if (!this.isGroundSensor(self)) {
+            return;
+        }
+
         this.groundContactCount++;
     }
 
-    onEndContact() {
+    onEndContact(contact: cc.PhysicsContact, self: cc.PhysicsCollider) {
+        if (!this.isGroundSensor(self)) {
+            return;
+        }
+
         this.groundContactCount = Math.max(0, this.groundContactCount - 1);
     }
 
@@ -156,6 +167,10 @@ export default class PlayerController extends cc.Component {
         this.groundContactCount = 0;
         this.playEffect(this.jumpSfx);
         this.playAnimation(this.jumpClipName);
+    }
+
+    private isGroundSensor(collider: cc.PhysicsCollider): boolean {
+        return collider && collider.tag === this.groundSensorTag;
     }
 
     private updateAnimation() {
