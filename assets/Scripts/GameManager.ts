@@ -11,6 +11,8 @@ enum PlayerState {
 @ccclass
 export default class GameManager extends cc.Component {
 
+    private static readonly FinalScoreKey: string = "web_mario_final_score";
+
     @property(cc.Node)
     player: cc.Node = null;
 
@@ -107,6 +109,7 @@ export default class GameManager extends cc.Component {
         }
 
         this.playerState = PlayerState.Finished;
+        this.saveFinalScore();
         cc.director.loadScene(this.gameOverScene);
     }
 
@@ -141,7 +144,12 @@ export default class GameManager extends cc.Component {
 
     private enterGameOver() {
         this.playerState = PlayerState.GameOver;
+        this.saveFinalScore();
         cc.director.loadScene(this.gameOverScene);
+    }
+
+    private saveFinalScore() {
+        cc.sys.localStorage.setItem(GameManager.FinalScoreKey, Math.floor(this.score).toString());
     }
 
     private playBgm() {

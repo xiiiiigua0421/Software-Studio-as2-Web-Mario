@@ -135,9 +135,10 @@ User-owned Cocos GUI setup:
 3. In `Game scene`, keep `GameManager.ts` attached and drag `Player` into its `player` field.
 4. Optional but recommended: create a finish trigger node with a Sensor collider and tag `20`.
 5. In `Game over`, attach `GameOver.ts`.
-6. Wire the Restart button to `restartLevel`.
-7. Wire the Menu button to `goToStartMenu`.
-8. Confirm all four scenes are added to Build Settings.
+6. Drag `FinalScoreLabel` into `GameOver.finalScoreLabel`.
+7. Wire the Restart button to `restartLevel`.
+8. Wire the Menu button to `goToStartMenu`.
+9. Confirm all four scenes are added to Build Settings.
 
 Implemented in TypeScript:
 
@@ -145,6 +146,7 @@ Implemented in TypeScript:
 - Level select loads `Game scene`.
 - Game over can restart `Game scene`.
 - Game over can return to `Start menu`.
+- Game over displays the final score from the previous run.
 - `GameManager` tracks `Alive`, `Dead`, `Respawning`, and `GameOver`.
 - When lives reach 0, `GameManager` loads `Game over`.
 - Player contact with finish tag `20` calls `GameManager.finishLevel()` and loads `Game over`.
@@ -366,10 +368,10 @@ Implemented in Markdown:
 - [x] Level select
 - [x] Game start and game over flow
 - [x] Finish tag trigger ends the level
-- [ ] At least one world map
+- [x] At least one world map
 - [ ] Correct gravity and collision
 - [x] Camera follows player
-- [ ] Static walls/platforms
+- [x] Static walls/platforms
 - [x] Question block interaction
 - [x] Player movement
 - [x] Player jump
