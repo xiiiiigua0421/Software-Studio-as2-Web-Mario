@@ -4,8 +4,8 @@ Assignment 02 Web Mario for NTHU Software Studio.
 
 - Engine: Cocos Creator 2.4.8
 - Game type: Mario-style web platformer
-- Firebase URL: TODO
-- Final package: TODO, `Assignment02_StudentID.zip`
+- Firebase URL: https://software-studio-as2-mario.web.app
+- Final package: `Assignment02_113062131.zip`
 
 ## Controls
 
@@ -68,9 +68,3 @@ Assignment 02 Web Mario for NTHU Software Studio.
 - Bonus
   - Firebase deployment
   - Leaderboard
-  - Multiplayer / backend online version
-  - Offline version
-
-## AI Usage
-
-AI assistance was used for planning, TypeScript implementation, PLAN.md updates, README writing, and commit message drafting. See `AI_reference.md` for summarized AI usage records.

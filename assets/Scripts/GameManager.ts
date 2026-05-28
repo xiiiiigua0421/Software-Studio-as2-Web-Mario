@@ -264,7 +264,7 @@ export default class GameManager extends cc.Component {
             return;
         }
 
-        this.scoreLabel.string = "SCORE " + this.formatNumber(this.score, 6);
+        this.scoreLabel.string = this.formatNumber(this.score, 6);
     }
 
     private updateTimerUI() {

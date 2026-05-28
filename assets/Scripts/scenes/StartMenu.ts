@@ -32,8 +32,8 @@ export default class StartMenu extends cc.Component {
             lines.push(
                 (i + 1) + ". " +
                 this.formatName(record.name) + "  " +
-                this.formatNumber(Number(record.score) || 0, 0) + "  " +
-                this.formatNumber(Number(record.time) || 0, 3)
+                this.formatNumber(Number(record.score) || 0, 0) + "pt  " +
+                this.formatNumber(Number(record.time) || 0, 3) + "s"
             );
         }
 
