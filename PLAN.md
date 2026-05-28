@@ -88,9 +88,6 @@ These items are not ready yet and still need Cocos Editor Inspector setup:
 3. Game over name input and submit:
    - `GameOver.nameEditBox` still needs `NameEditBox` dragged in.
    - `SubmitButton` still needs to call `GameOver.submitScore`.
-4. Sound effects:
-   - BGM and sound effect clips still need to be assigned in Inspector.
-
 ## Phase 1: Project Setup
 
 Status: Done
@@ -263,7 +260,7 @@ Implemented in TypeScript:
 
 ## Phase 6: Sound Effects
 
-Status: TypeScript hooks ready, Cocos audio assignment still needed
+Status: Done
 
 Codex-owned files:
 
@@ -277,16 +274,19 @@ User-owned Cocos GUI setup:
 
 1. In `GameManager`, drag a BGM clip such as `bgm_1.mp3` into `bgm`.
 2. In `GameManager`, drag `loseOneLife.wav` into `deathSfx`.
-3. In `PlayerController`, drag `jump.wav` into `jumpSfx`.
-4. In `Enemy`, drag `stomp.wav` into `stompSfx`.
-5. In `QuestionBlock`, drag `powerUpAppear.wav` into `itemAppearSfx`.
-6. In `PowerUp`, drag `PowerUp.mp3` into `powerUpSfx`.
-7. Save and preview `Game scene`.
+3. In `GameManager`, drag `coin.wav` into `scoreSfx`.
+4. In `GameManager`, drag `levelClear.mp3` into `levelClearSfx`.
+5. In `PlayerController`, drag `jump.wav` into `jumpSfx`.
+6. In `Enemy`, drag `stomp.wav` into `stompSfx`.
+7. In `QuestionBlock`, drag `powerUpAppear.wav` into `itemAppearSfx`.
+8. In `PowerUp`, drag `PowerUp.mp3` into `powerUpSfx`.
+9. Save and preview `Game scene`.
 
 Implemented in TypeScript:
 
 - BGM plays through `cc.audioEngine.playMusic(clip, true)`.
-- Jump, death, stomp, item appear, and power-up sound effects use `playEffect`.
+- Jump, death, score, level clear, stomp, item appear, and power-up sound effects use `playEffect`.
+- Seven sound effects are available in `assets/audio`: `jump.wav`, `loseOneLife.wav`, `coin.wav`, `levelClear.mp3`, `stomp.wav`, `powerUpAppear.wav`, and `PowerUp.mp3`.
 - Sound effects do not stop the BGM.
 - Missing audio clips are ignored safely.
 
@@ -424,7 +424,7 @@ Implemented in Markdown:
 - [x] BGM
 - [x] Jump sound effect
 - [x] Death sound effect
-- [ ] Extra sound effects
+- [x] Extra sound effects
 - [x] BGM continues while sound effects play
 - [x] Life UI
 - [x] Score UI
@@ -457,10 +457,10 @@ Implemented in Markdown:
 - [x] Animations: 10%
   - [x] Player walk and jump animations: 5%
   - [x] Enemy animations: 2% each, up to 5%
-- [ ] Sound Effects: 10%
+- [x] Sound Effects: 10%
   - [x] At least one BGM: 2%
   - [x] Player jump and die sound effects: 3%
-  - [ ] Additional sound effects: 1% each, up to 5%
+  - [x] Additional sound effects: 1% each, up to 5%
 - [x] UI: 10%
   - [x] Player life: 3%
   - [x] Player score: 5%

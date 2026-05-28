@@ -43,6 +43,12 @@ export default class GameManager extends cc.Component {
     @property(cc.AudioClip)
     deathSfx: cc.AudioClip = null;
 
+    @property(cc.AudioClip)
+    scoreSfx: cc.AudioClip = null;
+
+    @property(cc.AudioClip)
+    levelClearSfx: cc.AudioClip = null;
+
     @property(cc.Label)
     lifeLabel: cc.Label = null;
 
@@ -110,6 +116,7 @@ export default class GameManager extends cc.Component {
 
         this.score += points;
         this.updateScoreUI();
+        this.playEffect(this.scoreSfx);
     }
 
     finishLevel() {
@@ -118,6 +125,7 @@ export default class GameManager extends cc.Component {
         }
 
         this.playerState = PlayerState.Finished;
+        this.playEffect(this.levelClearSfx);
         this.saveLastResult(true);
         cc.director.loadScene(this.gameOverScene);
     }

@@ -46,11 +46,16 @@ Assignment 02 Web Mario for NTHU Software Studio.
     - Mushroom makes Mario bigger after collection.
 - Animations
   - Player walk and jump animations
-  - Enemy walk, fly, and death animation hooks
+  - Enemy walk, fly, and death animation
 - Sound Effects
-  - BGM hook
-  - Player jump and death sound hooks
-  - Additional sound effects hooks
+  - BGM
+  - Player jump and death sound
+  - Additional sound effects
+    - Stomp enemy
+    - Power up appears
+    - Power up collected
+    - Get score 
+    - Level clear
 - UI
   - Life display
   - Score display

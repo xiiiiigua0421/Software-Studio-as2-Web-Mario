@@ -140,6 +140,7 @@
     "deathY": -260,
     "gravityY": -600,
     "respawnDelay": 0.5,
+    "enemyHitPauseDelay": 0.3,
     "movingPlatform": {
       "__id__": 55
     },
@@ -149,6 +150,12 @@
     },
     "deathSfx": {
       "__uuid__": "f4672fca-e81d-4464-90f6-059eed93db56"
+    },
+    "scoreSfx": {
+      "__uuid__": "a03e149d-2379-4e34-b267-73a1ee6f1451"
+    },
+    "levelClearSfx": {
+      "__uuid__": "29198f0e-253d-41cd-aabc-5cfca13d1e42"
     },
     "lifeLabel": {
       "__id__": 10
