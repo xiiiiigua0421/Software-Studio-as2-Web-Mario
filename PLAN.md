@@ -435,6 +435,7 @@ Implemented in Markdown:
 - [ ] Submit button calls `GameOver.submitScore`
 - [ ] Appearance polish
 - [x] README.md with completed items and extra features
+- [x] Scoring focus copied from assignment PPTX
 - [ ] AI_reference.pdf if AI tools are used
 - [ ] Firebase deployment
 - [ ] Build output includes `index.html`
@@ -446,28 +447,28 @@ Implemented in Markdown:
 
 ## Scoring Focus
 
-- Complete Game Process: 5%
-- Basic Rules: 50%
-  - World Map: 10%
-  - Level Design: 5%
-  - Player: 15%
-  - Enemies: 15%
-  - Question Blocks: 5%
-- Animations: 10%
-  - Player walk and jump animations: 5%
-  - Enemy animations: 2% each, up to 5%
-- Sound Effects: 10%
-  - At least one BGM: 2%
-  - Player jump and die sound effects: 3%
-  - Additional sound effects: 1% each, up to 5%
-- UI: 10%
-  - Player life: 3%
-  - Player score: 5%
-  - Timer: 2%
-- Appearance: 10%
-- Git: 5%
-- Bonus: up to 10%
-  - Firebase: 5%
-  - Leaderboard: 5%
-  - Multiplayer / backend online version: up to 10%
-  - Offline version: 5%
+- [x] Complete Game Process: 5%
+- [x] Basic Rules: 50%
+  - [x] World Map: 10%
+  - [x] Level Design: 5%
+  - [x] Player: 15%
+  - [x] Enemies: 15%
+  - [x] Question Blocks: 5%
+- [x] Animations: 10%
+  - [x] Player walk and jump animations: 5%
+  - [x] Enemy animations: 2% each, up to 5%
+- [ ] Sound Effects: 10%
+  - [x] At least one BGM: 2%
+  - [x] Player jump and die sound effects: 3%
+  - [ ] Additional sound effects: 1% each, up to 5%
+- [x] UI: 10%
+  - [x] Player life: 3%
+  - [x] Player score: 5%
+  - [x] Timer: 2%
+- [ ] Appearance: 10%
+- [x] Git: 5%
+- [ ] Bonus: up to 10%
+  - [ ] Firebase: 5%
+  - [ ] Leaderboard: 5%
+  - [ ] Multiplayer / backend online version: up to 10%
+  - [ ] Offline version: 5%
