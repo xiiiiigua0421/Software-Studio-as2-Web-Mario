@@ -11,7 +11,7 @@ This file records summarized AI assistance for Assignment 02 Web Mario.
 ## Scope Of AI Usage
 
 Codex was used to help with:
-
+All code
 - Reading the assignment plan and local project structure.
 - Planning implementation phases.
 - Editing existing TypeScript files for game flow, player control, gameplay rules, animation hooks, sound hooks, and UI hooks.
@@ -36,9 +36,9 @@ The student remains responsible for:
   - Loads `Level select` through `goToLevelSelect()`.
 - `assets/Scripts/scenes/LevelSelect.ts:9`
   - Loads `Game scene` through `startLevelOne()`.
-- `assets/Scripts/scenes/GameOver.ts:12`
+- `assets/Scripts/scenes/GameOver.ts:32`
   - Restarts `Game scene`.
-- `assets/Scripts/scenes/GameOver.ts:16`
+- `assets/Scripts/scenes/GameOver.ts:36`
   - Returns to `Start menu`.
 - `assets/Scripts/scenes/StartMenu.ts:12`
   - Inspector field for the leaderboard label.
@@ -46,91 +46,99 @@ The student remains responsible for:
   - Displays the Top 5 local leaderboard.
 - `assets/Scripts/scenes/GameOver.ts:19`
   - Inspector field for the final time label.
-- `assets/Scripts/scenes/GameOver.ts:36`
+- `assets/Scripts/scenes/GameOver.ts:22`
+  - Inspector field for the game-over title label.
+- `assets/Scripts/scenes/GameOver.ts:25`
+  - Inspector field for the name input.
+- `assets/Scripts/scenes/GameOver.ts:40`
   - Public `submitScore()` method for the Submit button.
+- `assets/Scripts/scenes/GameOver.ts:59`
+  - Updates the title to `FINISH` or `GAME OVER`.
+- `assets/Scripts/scenes/GameOver.ts:131`
+  - Hides the name input after failed runs.
 
 ### Player, Physics, Audio, UI
 
-- `assets/Scripts/PlayerController.ts:19`
+- `assets/Scripts/PlayerController.ts:27`
   - Inspector field for player animation.
-- `assets/Scripts/PlayerController.ts:31`
+- `assets/Scripts/PlayerController.ts:40`
   - Inspector field for jump sound effect.
-- `assets/Scripts/PlayerController.ts:157`
+- `assets/Scripts/PlayerController.ts:190`
   - Plays jump sound after a valid jump.
-- `assets/Scripts/PlayerController.ts:180`
+- `assets/Scripts/PlayerController.ts:225`
   - Checks whether an animation state exists before playing it.
-- `assets/Scripts/PlayerController.ts:185`
+- `assets/Scripts/PlayerController.ts:230`
   - Plays the selected player animation clip.
 - `assets/Scripts/PlayerController.ts:115`
   - Pauses player motion during enemy contact.
 - `assets/Scripts/PlayerController.ts:202`
   - Calls `GameManager.finishLevel()` after finish trigger contact.
-- `assets/Scripts/GameManager.ts:20`
+- `assets/Scripts/GameManager.ts:23`
   - Out-of-bounds `deathY` threshold.
 - `assets/Scripts/GameManager.ts:32`
   - Enemy hit pause delay.
-- `assets/Scripts/GameManager.ts:32`
-  - BGM Inspector field.
-- `assets/Scripts/GameManager.ts:35`
-  - Death sound effect Inspector field.
-- `assets/Scripts/GameManager.ts:38`
-  - Life label Inspector field.
 - `assets/Scripts/GameManager.ts:41`
-  - Score label Inspector field.
+  - BGM Inspector field.
 - `assets/Scripts/GameManager.ts:44`
+  - Death sound effect Inspector field.
+- `assets/Scripts/GameManager.ts:53`
+  - Life label Inspector field.
+- `assets/Scripts/GameManager.ts:56`
+  - Score label Inspector field.
+- `assets/Scripts/GameManager.ts:59`
   - Timer label Inspector field.
-- `assets/Scripts/GameManager.ts:81`
+- `assets/Scripts/GameManager.ts:98`
   - Detects out-of-bounds player fall.
-- `assets/Scripts/GameManager.ts:86`
+- `assets/Scripts/GameManager.ts:102`
   - Public `hurtPlayer()` method for enemy damage.
-- `assets/Scripts/GameManager.ts:115`
+- `assets/Scripts/GameManager.ts:122`
   - Public `finishLevel()` method for finish trigger completion.
-- `assets/Scripts/GameManager.ts:161`
-  - Saves final score, time, and finished state to local storage.
-- `assets/Scripts/GameManager.ts:174`
-  - Pauses player motion during enemy contact.
-- `assets/Scripts/GameManager.ts:190`
-  - Resumes the paused enemy after player respawn.
-- `assets/Scripts/GameManager.ts:210`
-  - Starts the optional moving platform action.
-- `assets/Scripts/GameManager.ts:94`
-  - Public `addScore(points)` method.
-- `assets/Scripts/GameManager.ts:142`
-  - Starts looping BGM with `playMusic`.
-- `assets/Scripts/GameManager.ts:150`
-  - Plays one-shot sound effects with `playEffect`.
-- `assets/Scripts/GameManager.ts:164`
-  - Updates life UI text.
-- `assets/Scripts/GameManager.ts:172`
-  - Updates score UI text.
+- `assets/Scripts/GameManager.ts:169`
+  - Saves final score, time, finished state, and result title to local storage.
 - `assets/Scripts/GameManager.ts:180`
+  - Pauses player motion during enemy contact.
+- `assets/Scripts/GameManager.ts:191`
+  - Resumes the paused enemy after player respawn.
+- `assets/Scripts/GameManager.ts:219`
+  - Starts the optional moving platform action.
+- `assets/Scripts/GameManager.ts:112`
+  - Public `addScore(points)` method.
+- `assets/Scripts/GameManager.ts:237`
+  - Starts looping BGM with `playMusic`.
+- `assets/Scripts/GameManager.ts:245`
+  - Plays one-shot sound effects with `playEffect`.
+- `assets/Scripts/GameManager.ts:254`
+  - Updates life UI text.
+- `assets/Scripts/GameManager.ts:262`
+  - Updates score UI text.
+- `assets/Scripts/GameManager.ts:270`
   - Updates timer UI text.
 - `assets/Scripts/CameraFollow.ts:4`
   - Camera follow component.
 
 ### Gameplay Objects
 
-- `assets/Scripts/gameplay/Enemy.ts:16`
+- `assets/Scripts/gameplay/Enemy.ts:18`
   - Inspector field for enemy animation.
 - `assets/Scripts/gameplay/Enemy.ts:13`
   - Fixed Goomba falling speed.
 - `assets/Scripts/gameplay/Enemy.ts:25`
   - Goomba fly animation clip name.
-- `assets/Scripts/gameplay/Enemy.ts:31`
+- `assets/Scripts/gameplay/Enemy.ts:37`
   - Enemy score value.
 - `assets/Scripts/gameplay/Enemy.ts:73`
   - Clamps Goomba falling speed.
-- `assets/Scripts/gameplay/Enemy.ts:86`
+- `assets/Scripts/gameplay/Enemy.ts:97`
   - Adds score after stomping an enemy.
-- `assets/Scripts/gameplay/Enemy.ts:102`
+- `assets/Scripts/gameplay/Enemy.ts:105`
   - Pauses Goomba before notifying `GameManager` about side contact.
 - `assets/Scripts/gameplay/Enemy.ts:118`
   - Resumes Goomba movement after player respawn.
 - `assets/Scripts/gameplay/Enemy.ts:153`
   - Plays the fly animation while Goomba is moving vertically.
-- `assets/Scripts/gameplay/Enemy.ts:133`
+- `assets/Scripts/gameplay/Enemy.ts:160`
   - Plays enemy animation clip.
-- `assets/Scripts/gameplay/Enemy.ts:150`
+- `assets/Scripts/gameplay/Enemy.ts:187`
   - Calls `GameManager.addScore(points)`.
 - `assets/Scripts/gameplay/QuestionBlock.ts:19`
   - Question block score value.
@@ -226,6 +234,17 @@ The student remains responsible for:
   - Codex restructured `README.md` around the assignment scoring focus.
   - Codex updated `PLAN.md` to track remaining Cocos Inspector tasks and scoring progress.
 
+### Final Result UI Updates
+
+- Prompt summary:
+  - Change the game-over title after a successful finish and hide the name input after failed runs.
+  - Keep project documentation synchronized with the current scripts.
+- Response summary:
+  - Codex updated the last-result data with a `FINISH` / `GAME OVER` title.
+  - Codex updated `GameOver.ts` so the title label reflects the result state.
+  - Codex hid the name input after failed runs and kept it visible only after finished runs.
+  - Codex updated Markdown documentation and refreshed source line references.
+
 ## Version And Modification Record
 
 - `334279d Set up initial Cocos scenes`
@@ -252,6 +271,16 @@ The student remains responsible for:
   - Short pause when Player touches an enemy from the side.
 - `5ae9148 Update PLAN.md`
   - Updated planning checklist and scoring documentation.
+- `1ec804d Revise docs around scoring focus and AI reference`
+  - Documentation updates for scoring focus and AI reference.
+- `752507c Add score and level clear sound hooks`
+  - Added score and level clear audio hooks.
+- `9e906b5 Update HUD and game over result handling`
+  - Updated game-over result handling and related documentation.
+- `969a733 Update deployment assets and README`
+  - Updated deployment assets and README.
+- `65c691a v1`
+  - Final README update.
 
 ## Notes For Final Submission
 
