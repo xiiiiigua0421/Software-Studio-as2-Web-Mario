@@ -210,6 +210,7 @@ Implemented in TypeScript:
 - Player can bounce after stomping enemies.
 - Player can grow after collecting a mushroom.
 - Goomba patrols left and right.
+- Goomba falling speed is fixed with `fallSpeed = -70`.
 - Stomping Goomba destroys it.
 - Touching Goomba from the side hurts the player.
 - Question block triggers only once when hit from below.
@@ -230,7 +231,7 @@ User-owned Cocos GUI setup:
 1. Create `player_idle`, `player_walk`, and `player_jump` animation clips.
 2. Add a `cc.Animation` component to `Player`.
 3. Add the player clips to the `Player` animation component.
-4. Create `goomba_walk` animation clip.
+4. Create `goomba_walk` and `goomba_fly` animation clips.
 5. Optional: create `goomba_die` animation clip.
 6. Add a `cc.Animation` component to the Goomba node.
 7. Add the Goomba clips to the Goomba animation component.
@@ -241,6 +242,7 @@ Implemented in TypeScript:
 - Player switches between idle, walk, and jump clips from movement and grounded state.
 - Jump animation plays immediately after a valid jump.
 - Goomba plays its walk clip on start.
+- Goomba switches to its fly clip while moving vertically in the air.
 - Goomba can play an optional death clip before being destroyed.
 - Missing animation components or clip names are ignored safely.
 

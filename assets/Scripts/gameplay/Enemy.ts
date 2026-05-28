@@ -10,6 +10,9 @@ export default class Enemy extends cc.Component {
     patrolDistance: number = 120;
 
     @property
+    fallSpeed: number = -70;
+
+    @property
     stompTolerance: number = 8;
 
     @property(cc.Animation)
@@ -17,6 +20,9 @@ export default class Enemy extends cc.Component {
 
     @property
     walkClipName: string = "goomba_walk";
+
+    @property
+    flyClipName: string = "goomba_fly";
 
     @property
     deathClipName: string = "goomba_die";
@@ -62,12 +68,16 @@ export default class Enemy extends cc.Component {
         if (this.body) {
             const velocity = this.body.linearVelocity;
             velocity.x = this.moveDir * this.moveSpeed;
+            if (velocity.y < 0) {
+                velocity.y = this.fallSpeed;
+            }
             this.body.linearVelocity = velocity;
         } else {
             this.node.x += this.moveDir * this.moveSpeed * dt;
         }
 
         this.node.scaleX = Math.abs(this.node.scaleX) * (this.moveDir > 0 ? -1 : 1);
+        this.updateAnimation();
     }
 
     onBeginContact(contact: cc.PhysicsContact, self: cc.PhysicsCollider, other: cc.PhysicsCollider) {
@@ -118,6 +128,15 @@ export default class Enemy extends cc.Component {
         }
 
         this.node.destroy();
+    }
+
+    private updateAnimation() {
+        if (this.body && Math.abs(this.body.linearVelocity.y) > 1) {
+            this.playAnimation(this.flyClipName);
+            return;
+        }
+
+        this.playAnimation(this.walkClipName);
     }
 
     private playAnimation(clipName: string): boolean {
