@@ -6,6 +6,7 @@ Assignment 02 Web Mario for NTHU Software Studio.
 - Game type: Mario-style web platformer
 - Firebase URL: https://software-studio-as2-mario.web.app
 - Final package: `Assignment02_113062131.zip`
+- Github URL: https://github.com/xiiiiigua0421/Software-Studio-as2-Web-Mario
 
 ## Controls
 
