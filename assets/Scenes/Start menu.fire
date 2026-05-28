@@ -865,6 +865,7 @@
     },
     "_enabled": true,
     "levelSelectScene": "Level select",
+    "leaderboardLabel": null,
     "_id": "c5K1+no+dCibN0YHFU5p2S"
   }
 ]
