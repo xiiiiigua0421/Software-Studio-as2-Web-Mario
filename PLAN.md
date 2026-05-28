@@ -76,6 +76,21 @@ Canvas
   GameOver
 ```
 
+## Remaining User-owned Cocos GUI Setup
+
+These items are not ready yet and still need Cocos Editor Inspector setup:
+
+1. Start menu leaderboard:
+   - `StartMenu.leaderboardLabel` still needs `LeaderboardLabel` dragged in.
+2. Game over result UI:
+   - `GameOver.finalScoreLabel` still needs `FinalScoreLabel` dragged in.
+   - `GameOver.finalTimeLabel` still needs `FinalTimeLabel` dragged in.
+3. Game over name input and submit:
+   - `GameOver.nameEditBox` still needs `NameEditBox` dragged in.
+   - `SubmitButton` still needs to call `GameOver.submitScore`.
+4. Sound effects:
+   - BGM and sound effect clips still need to be assigned in Inspector.
+
 ## Phase 1: Project Setup
 
 Status: Done
@@ -93,7 +108,7 @@ Commit: `334279d Set up initial Cocos scenes`
 
 ## Phase 2: Minimum Playable Game
 
-Status: TypeScript ready, Cocos scene setup still needed
+Status: Done
 
 Codex-owned files:
 
@@ -124,7 +139,7 @@ Implemented in TypeScript:
 
 ## Phase 3: Game Process
 
-Status: TypeScript ready, Cocos button wiring still needed
+Status: TypeScript ready, selected Cocos GUI setup still needed
 
 Codex-owned files:
 
@@ -165,7 +180,7 @@ Implemented in TypeScript:
 
 ## Phase 4: Basic Rules
 
-Status: TypeScript ready, Cocos gameplay objects still need scene setup
+Status: Done
 
 Codex-owned files:
 
@@ -219,7 +234,7 @@ Implemented in TypeScript:
 
 ## Phase 5: Animations
 
-Status: TypeScript hooks ready, Cocos animation clips still needed
+Status: Done
 
 Codex-owned files:
 
@@ -277,7 +292,7 @@ Implemented in TypeScript:
 
 ## Phase 7: UI
 
-Status: TypeScript ready, Cocos UI labels still needed
+Status: Done
 
 Codex-owned files:
 
@@ -313,6 +328,8 @@ Implemented in TypeScript:
 - Missing UI Label references are ignored safely.
 
 ## Phase 8: Appearance Polish
+
+Status: Mostly done, final visual check still recommended
 
 1. Improve map layout.
 2. Place enemies, question blocks, and items in reasonable positions.
@@ -389,7 +406,7 @@ Implemented in Markdown:
 - [x] Game start and game over flow
 - [x] Finish tag trigger ends the level
 - [x] At least one world map
-- [ ] Correct gravity and collision
+- [x] Correct gravity and collision
 - [x] Camera follows player
 - [x] Static walls/platforms
 - [x] Question block interaction
@@ -407,13 +424,15 @@ Implemented in Markdown:
 - [x] BGM
 - [x] Jump sound effect
 - [x] Death sound effect
-- [x] Extra sound effects
-- [x] BGM continues while sound effects play
+- [ ] Extra sound effects
+- [ ] BGM continues while sound effects play
 - [x] Life UI
 - [x] Score UI
 - [x] Timer UI
-- [x] Start menu leaderboard
-- [x] Game over name input for finished runs
+- [ ] Start menu leaderboard
+- [ ] Game over final score/time labels
+- [ ] Game over name input for finished runs
+- [ ] Submit button calls `GameOver.submitScore`
 - [ ] Appearance polish
 - [x] README.md with completed items and extra features
 - [ ] AI_reference.pdf if AI tools are used
