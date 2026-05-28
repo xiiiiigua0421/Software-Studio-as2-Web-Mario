@@ -19,6 +19,12 @@ Canvas
   Background
   Title
   LeaderboardLabel
+  EmailEditBox
+  PasswordEditBox
+  AuthStatusLabel
+  SignInButton
+  SignUpButton
+  SignOutButton
   StartButton
   StartMenu
 ```
@@ -82,12 +88,19 @@ These items are not ready yet and still need Cocos Editor Inspector setup:
 
 1. Start menu leaderboard:
    - `StartMenu.leaderboardLabel` still needs `LeaderboardLabel` dragged in.
-2. Game over result UI:
+2. Start menu Firebase Auth:
+   - `StartMenu.emailEditBox` still needs `EmailEditBox` dragged in.
+   - `StartMenu.passwordEditBox` still needs `PasswordEditBox` dragged in.
+   - `StartMenu.authStatusLabel` still needs `AuthStatusLabel` dragged in.
+   - `SignInButton` still needs to call `StartMenu.signIn`.
+   - `SignUpButton` still needs to call `StartMenu.signUp`.
+   - `SignOutButton` still needs to call `StartMenu.signOut`.
+3. Game over result UI:
    - Optional: drag `Title` into `GameOver.titleLabel`.
    - If not dragged, `GameOver.ts` tries to find `Canvas/Title`.
    - `GameOver.finalScoreLabel` still needs `FinalScoreLabel` dragged in.
    - `GameOver.finalTimeLabel` still needs `FinalTimeLabel` dragged in.
-3. Game over name input and submit:
+4. Game over name input and submit:
    - `GameOver.nameEditBox` still needs `NameEditBox` dragged in.
    - `SubmitButton` still needs to call `GameOver.submitScore`.
 ## Phase 1: Project Setup
@@ -151,22 +164,26 @@ User-owned Cocos GUI setup:
 
 1. In `Start menu`, attach `StartMenu.ts` and wire the Start button to `goToLevelSelect`.
 2. Create `LeaderboardLabel` and drag it into `StartMenu.leaderboardLabel`.
-3. In `Level select`, attach `LevelSelect.ts` and wire the Level 1 button to `startLevelOne`.
-4. In `Game scene`, keep `GameManager.ts` attached and drag `Player` into its `player` field.
-5. Optional but recommended: create a finish trigger node with a Sensor collider and tag `20`.
-6. In `Game over`, attach `GameOver.ts`.
-7. Drag `FinalScoreLabel` into `GameOver.finalScoreLabel`.
-8. Drag `FinalTimeLabel` into `GameOver.finalTimeLabel`.
-9. Optional: drag `Title` into `GameOver.titleLabel`; otherwise keep the node path as `Canvas/Title`.
-10. Drag `NameEditBox` into `GameOver.nameEditBox`.
-11. Wire the Submit button to `submitScore`.
-12. Wire the Restart button to `restartLevel`.
-13. Wire the Menu button to `goToStartMenu`.
-14. Confirm all four scenes are added to Build Settings.
+3. Create `EmailEditBox`, `PasswordEditBox`, and `AuthStatusLabel`, then drag them into `StartMenu`.
+4. Wire auth buttons to `StartMenu.signIn`, `StartMenu.signUp`, and `StartMenu.signOut`.
+5. In `Level select`, attach `LevelSelect.ts` and wire the Level 1 button to `startLevelOne`.
+6. In `Game scene`, keep `GameManager.ts` attached and drag `Player` into its `player` field.
+7. Optional but recommended: create a finish trigger node with a Sensor collider and tag `20`.
+8. In `Game over`, attach `GameOver.ts`.
+9. Drag `FinalScoreLabel` into `GameOver.finalScoreLabel`.
+10. Drag `FinalTimeLabel` into `GameOver.finalTimeLabel`.
+11. Optional: drag `Title` into `GameOver.titleLabel`; otherwise keep the node path as `Canvas/Title`.
+12. Drag `NameEditBox` into `GameOver.nameEditBox`.
+13. Wire the Submit button to `submitScore`.
+14. Wire the Restart button to `restartLevel`.
+15. Wire the Menu button to `goToStartMenu`.
+16. Confirm all four scenes are added to Build Settings.
 
 Implemented in TypeScript:
 
 - Start menu loads `Level select`.
+- Start menu can register, log in, log out, and show Firebase Auth status through `firebase-auth.js`.
+- Firebase Auth is an optional Start Menu area and does not block the original Start button flow.
 - Level select loads `Game scene`.
 - Game over can restart `Game scene`.
 - Game over can return to `Start menu`.
@@ -174,6 +191,7 @@ Implemented in TypeScript:
 - Game over title changes to `FINISH` after a successful finish and `GAME OVER` after losing all lives.
 - Game over can submit a player name after a finished run.
 - Game over hides the name input after failed runs.
+- Game over pre-fills the name input with the logged-in email prefix and leaves it blank when not logged in.
 - Start menu displays a Top 5 leaderboard from local storage.
 - `GameManager` tracks `Alive`, `Dead`, `Respawning`, and `GameOver`.
 - When lives reach 0, `GameManager` loads `Game over`.

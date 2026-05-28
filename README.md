@@ -18,6 +18,7 @@ Assignment 02 Web Mario for NTHU Software Studio.
 
 - Complete Game Process
   - Start menu opens the level select scene.
+  - Start menu includes an optional Firebase email/password login area that does not block starting the game.
   - Level select starts the game scene.
   - Game scene can end through lives reaching zero or the finish trigger.
   - Game over scene supports restart and return-to-menu flow.
@@ -68,4 +69,6 @@ Assignment 02 Web Mario for NTHU Software Studio.
   - Project uses Git version control with multiple commits.
 - Bonus
   - Firebase deployment
+    - Deploy to Firebase page 
+    - Membership mechanism 
   - Leaderboard

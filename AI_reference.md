@@ -42,8 +42,26 @@ The student remains responsible for:
   - Returns to `Start menu`.
 - `assets/Scripts/scenes/StartMenu.ts:12`
   - Inspector field for the leaderboard label.
-- `assets/Scripts/scenes/StartMenu.ts:40`
+- `assets/Scripts/scenes/StartMenu.ts:15`
+  - Inspector field for the Firebase Auth email input.
+- `assets/Scripts/scenes/StartMenu.ts:18`
+  - Inspector field for the Firebase Auth password input.
+- `assets/Scripts/scenes/StartMenu.ts:21`
+  - Inspector field for the Firebase Auth status label.
+- `assets/Scripts/scenes/StartMenu.ts:41`
+  - Public `signIn()` method for the sign-in button.
+- `assets/Scripts/scenes/StartMenu.ts:58`
+  - Public `signUp()` method for the sign-up button.
+- `assets/Scripts/scenes/StartMenu.ts:75`
+  - Public `signOut()` method for the sign-out button.
+- `assets/Scripts/scenes/StartMenu.ts:90`
+  - Initializes Firebase Auth state without blocking the original start flow.
+- `assets/Scripts/scenes/StartMenu.ts:174`
   - Displays the Top 5 local leaderboard.
+- `assets/Scripts/firebase-auth.js:3`
+  - Firebase project configuration for Auth.
+- `assets/Scripts/firebase-auth.js:47`
+  - Exposes `WebMarioFirebaseAuth` helper methods to Cocos scripts.
 - `assets/Scripts/scenes/GameOver.ts:19`
   - Inspector field for the final time label.
 - `assets/Scripts/scenes/GameOver.ts:22`
@@ -54,8 +72,10 @@ The student remains responsible for:
   - Public `submitScore()` method for the Submit button.
 - `assets/Scripts/scenes/GameOver.ts:59`
   - Updates the title to `FINISH` or `GAME OVER`.
-- `assets/Scripts/scenes/GameOver.ts:131`
+- `assets/Scripts/scenes/GameOver.ts:132`
   - Hides the name input after failed runs.
+- `assets/Scripts/scenes/GameOver.ts:138`
+  - Pre-fills the name input from the logged-in email prefix.
 
 ### Player, Physics, Audio, UI
 
@@ -243,7 +263,19 @@ The student remains responsible for:
   - Codex updated the last-result data with a `FINISH` / `GAME OVER` title.
   - Codex updated `GameOver.ts` so the title label reflects the result state.
   - Codex hid the name input after failed runs and kept it visible only after finished runs.
+  - Codex pre-filled the name input from the logged-in email prefix and left it blank when not logged in.
   - Codex updated Markdown documentation and refreshed source line references.
+
+### Firebase Auth Login Area
+
+- Prompt summary:
+  - Add Firebase email/password login support to the start menu.
+  - Keep the login area independent from the original Start button flow.
+- Response summary:
+  - Codex added Start Menu Inspector hooks for email input, password input, and auth status text.
+  - Codex added public `signIn`, `signUp`, and `signOut` methods for Cocos Button click events.
+  - Codex added a `WebMarioFirebaseAuth` helper around Firebase Auth v8.
+  - Codex kept auth failures non-blocking so the Start button can still load the level select scene.
 
 ## Version And Modification Record
 

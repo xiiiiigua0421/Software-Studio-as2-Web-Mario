@@ -61,6 +61,7 @@ export default class GameOver extends cc.Component {
         }
 
         this.updateNameInputVisibility(result.finished);
+        this.updateDefaultPlayerName(result.finished);
 
         if (this.finalScoreLabel) {
             this.finalScoreLabel.string = "FINAL SCORE " + this.formatNumber(result.score, 0);
@@ -131,6 +132,37 @@ export default class GameOver extends cc.Component {
     private updateNameInputVisibility(finished: boolean) {
         if (this.nameEditBox) {
             this.nameEditBox.node.active = finished;
+        }
+    }
+
+    private updateDefaultPlayerName(finished: boolean) {
+        if (!this.nameEditBox) {
+            return;
+        }
+
+        if (!finished) {
+            this.nameEditBox.string = "";
+            return;
+        }
+
+        this.nameEditBox.string = this.getLoggedInName();
+    }
+
+    private getLoggedInName(): string {
+        try {
+            const auth = (window as any).WebMarioFirebaseAuth;
+            if (!auth || !auth.getCurrentUser) {
+                return "";
+            }
+
+            const user = auth.getCurrentUser();
+            if (!user || !user.email) {
+                return "";
+            }
+
+            return user.email.split("@")[0];
+        } catch (error) {
+            return "";
         }
     }
 
