@@ -18,10 +18,14 @@ export default class GameOver extends cc.Component {
     @property(cc.Label)
     finalTimeLabel: cc.Label = null;
 
+    @property(cc.Label)
+    titleLabel: cc.Label = null;
+
     @property(cc.EditBox)
     nameEditBox: cc.EditBox = null;
 
     start() {
+        this.resolveTitleLabel();
         this.updateFinalResultLabels();
     }
 
@@ -52,6 +56,12 @@ export default class GameOver extends cc.Component {
     private updateFinalResultLabels() {
         const result = this.loadLastResult();
 
+        if (this.titleLabel) {
+            this.titleLabel.string = result.title;
+        }
+
+        this.updateNameInputVisibility(result.finished);
+
         if (this.finalScoreLabel) {
             this.finalScoreLabel.string = "FINAL SCORE " + this.formatNumber(result.score, 0);
         }
@@ -77,18 +87,50 @@ export default class GameOver extends cc.Component {
     private loadLastResult(): any {
         const json = cc.sys.localStorage.getItem(GameOver.LastResultKey);
         if (!json) {
-            return { score: 0, time: 0, finished: false };
+            return this.createDefaultResult(false);
         }
 
         try {
             const result = JSON.parse(json);
+            const finished = result.finished === true;
             return {
                 score: Number(result.score) || 0,
                 time: Number(result.time) || 0,
-                finished: result.finished === true,
+                finished: finished,
+                title: this.getResultTitle(finished),
             };
         } catch (error) {
-            return { score: 0, time: 0, finished: false };
+            return this.createDefaultResult(false);
+        }
+    }
+
+    private createDefaultResult(finished: boolean): any {
+        return {
+            score: 0,
+            time: 0,
+            finished: finished,
+            title: this.getResultTitle(finished),
+        };
+    }
+
+    private getResultTitle(finished: boolean): string {
+        return finished ? "FINISH" : "GAME OVER";
+    }
+
+    private resolveTitleLabel() {
+        if (this.titleLabel) {
+            return;
+        }
+
+        const titleNode = cc.find("Canvas/Title");
+        if (titleNode) {
+            this.titleLabel = titleNode.getComponent(cc.Label);
+        }
+    }
+
+    private updateNameInputVisibility(finished: boolean) {
+        if (this.nameEditBox) {
+            this.nameEditBox.node.active = finished;
         }
     }
 

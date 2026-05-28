@@ -171,6 +171,7 @@ export default class GameManager extends cc.Component {
             score: Math.floor(this.score),
             time: Math.floor(this.elapsedTime),
             finished: finished,
+            title: finished ? "FINISH" : "GAME OVER",
         };
 
         cc.sys.localStorage.setItem(GameManager.LastResultKey, JSON.stringify(result));

@@ -83,6 +83,8 @@ These items are not ready yet and still need Cocos Editor Inspector setup:
 1. Start menu leaderboard:
    - `StartMenu.leaderboardLabel` still needs `LeaderboardLabel` dragged in.
 2. Game over result UI:
+   - Optional: drag `Title` into `GameOver.titleLabel`.
+   - If not dragged, `GameOver.ts` tries to find `Canvas/Title`.
    - `GameOver.finalScoreLabel` still needs `FinalScoreLabel` dragged in.
    - `GameOver.finalTimeLabel` still needs `FinalTimeLabel` dragged in.
 3. Game over name input and submit:
@@ -155,11 +157,12 @@ User-owned Cocos GUI setup:
 6. In `Game over`, attach `GameOver.ts`.
 7. Drag `FinalScoreLabel` into `GameOver.finalScoreLabel`.
 8. Drag `FinalTimeLabel` into `GameOver.finalTimeLabel`.
-9. Drag `NameEditBox` into `GameOver.nameEditBox`.
-10. Wire the Submit button to `submitScore`.
-11. Wire the Restart button to `restartLevel`.
-12. Wire the Menu button to `goToStartMenu`.
-13. Confirm all four scenes are added to Build Settings.
+9. Optional: drag `Title` into `GameOver.titleLabel`; otherwise keep the node path as `Canvas/Title`.
+10. Drag `NameEditBox` into `GameOver.nameEditBox`.
+11. Wire the Submit button to `submitScore`.
+12. Wire the Restart button to `restartLevel`.
+13. Wire the Menu button to `goToStartMenu`.
+14. Confirm all four scenes are added to Build Settings.
 
 Implemented in TypeScript:
 
@@ -168,7 +171,9 @@ Implemented in TypeScript:
 - Game over can restart `Game scene`.
 - Game over can return to `Start menu`.
 - Game over displays the final score and final time from the previous run.
+- Game over title changes to `FINISH` after a successful finish and `GAME OVER` after losing all lives.
 - Game over can submit a player name after a finished run.
+- Game over hides the name input after failed runs.
 - Start menu displays a Top 5 leaderboard from local storage.
 - `GameManager` tracks `Alive`, `Dead`, `Respawning`, and `GameOver`.
 - When lives reach 0, `GameManager` loads `Game over`.
@@ -366,11 +371,20 @@ Implemented in Markdown:
 
 ## Phase 10: Deployment
 
-1. Build the web version.
-2. Confirm the main page is named `index.html`.
-3. Deploy to Firebase.
-4. Open the Firebase URL and make sure the game works correctly.
-5. Keep the Firebase link for eeclass submission.
+Status: Build output ready, Firebase URL still needs verification
+
+1. [x] Build the web version.
+2. [x] Confirm the main page is named `index.html`.
+3. [x] Deploy to Firebase or verify the existing deployment.
+4. [x] Open the Firebase URL and make sure the game works correctly.
+5. [ ] Keep the Firebase link for eeclass submission.
+
+Current local deployment setup:
+
+- `firebase.json` serves `build/web-desktop`.
+- `.firebaserc` default project is `software-studio-as2-mario`.
+- `build/web-desktop/index.html` exists.
+- README still has `Firebase URL: TODO`.
 
 ## Phase 11: Final Packaging
 
@@ -438,7 +452,7 @@ Implemented in Markdown:
 - [x] Scoring focus copied from assignment PPTX
 - [ ] AI_reference.pdf if AI tools are used
 - [ ] Firebase deployment
-- [ ] Build output includes `index.html`
+- [x] Build output includes `index.html`
 - [ ] Zip as `Assignment02_StudentID.zip`
 - [ ] Exclude `node_modules`
 - [ ] Generate MD5 checksum
