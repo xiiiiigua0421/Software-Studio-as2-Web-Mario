@@ -46,6 +46,7 @@ export default class PlayerController extends cc.Component {
     private baseScaleY: number = 1;
     private isBig: boolean = false;
     private currentAnimationName: string = "";
+    private paused: boolean = false;
 
     onLoad() {
         this.body = this.getComponent(cc.RigidBody);
@@ -64,7 +65,7 @@ export default class PlayerController extends cc.Component {
     }
 
     update() {
-        if (!this.body) {
+        if (!this.body || this.paused) {
             return;
         }
 
@@ -101,6 +102,7 @@ export default class PlayerController extends cc.Component {
     }
 
     resetMotion() {
+        this.paused = false;
         if (this.body) {
             this.body.linearVelocity = cc.v2(0, 0);
             this.body.angularVelocity = 0;
@@ -108,6 +110,15 @@ export default class PlayerController extends cc.Component {
         this.moveDir = 0;
         this.groundContactCount = 0;
         this.playAnimation(this.idleClipName);
+    }
+
+    pauseMotion() {
+        this.paused = true;
+        this.moveDir = 0;
+        if (this.body) {
+            this.body.linearVelocity = cc.v2(0, 0);
+            this.body.angularVelocity = 0;
+        }
     }
 
     bounceFromEnemy() {

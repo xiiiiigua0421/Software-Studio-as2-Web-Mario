@@ -40,6 +40,7 @@ export default class Enemy extends cc.Component {
     private startX: number = 0;
     private moveDir: number = -1;
     private isDead: boolean = false;
+    private isPaused: boolean = false;
     private currentAnimationName: string = "";
 
     onLoad() {
@@ -55,7 +56,7 @@ export default class Enemy extends cc.Component {
     }
 
     update(dt: number) {
-        if (this.isDead) {
+        if (this.isDead || this.isPaused) {
             return;
         }
 
@@ -98,11 +99,28 @@ export default class Enemy extends cc.Component {
             return;
         }
 
-        const managerNode = cc.find("GameManager");
+        this.pauseMotion();
+        const managerNode = cc.find("Canvas/GameManager") || cc.find("GameManager");
         const gameManager = managerNode ? managerNode.getComponent("GameManager") as any : null;
         if (gameManager && gameManager.hurtPlayer) {
-            gameManager.hurtPlayer();
+            gameManager.hurtPlayer(this.node);
         }
+    }
+
+    pauseMotion() {
+        this.isPaused = true;
+        if (this.body) {
+            this.body.linearVelocity = cc.v2(0, 0);
+            this.body.angularVelocity = 0;
+        }
+    }
+
+    resumeMotion() {
+        if (this.isDead) {
+            return;
+        }
+
+        this.isPaused = false;
     }
 
     private isStompedBy(player: cc.Node): boolean {

@@ -28,6 +28,9 @@ export default class GameManager extends cc.Component {
     @property
     respawnDelay: number = 0.5;
 
+    @property
+    enemyHitPauseDelay: number = 0.3;
+
     @property(cc.Node)
     movingPlatform: cc.Node = null;
 
@@ -57,6 +60,7 @@ export default class GameManager extends cc.Component {
 
     private spawnPosition: cc.Vec3 = null;
     private playerState: PlayerState = PlayerState.Alive;
+    private pausedEnemyNode: cc.Node = null;
 
     onLoad() {
         const physicsManager = cc.director.getPhysicsManager();
@@ -90,12 +94,13 @@ export default class GameManager extends cc.Component {
         }
     }
 
-    hurtPlayer() {
+    hurtPlayer(enemyNode?: cc.Node) {
         if (this.playerState !== PlayerState.Alive) {
             return;
         }
 
-        this.loseLifeAndRespawn();
+        this.pauseAfterEnemyHit(enemyNode);
+        this.scheduleOnce(() => this.loseLifeAndRespawn(), this.enemyHitPauseDelay);
     }
 
     addScore(points: number) {
@@ -143,6 +148,7 @@ export default class GameManager extends cc.Component {
         if (controller && controller.resetMotion) {
             controller.resetMotion();
         }
+        this.resumePausedEnemy();
         this.playerState = PlayerState.Alive;
     }
 
@@ -160,6 +166,45 @@ export default class GameManager extends cc.Component {
         };
 
         cc.sys.localStorage.setItem(GameManager.LastResultKey, JSON.stringify(result));
+    }
+
+    private pauseAfterEnemyHit(enemyNode?: cc.Node) {
+        this.pausedEnemyNode = enemyNode || null;
+        const playerController = this.player ? this.player.getComponent("PlayerController") as any : null;
+        if (playerController && playerController.pauseMotion) {
+            playerController.pauseMotion();
+        }
+
+        this.stopRigidBody(this.player);
+        this.stopRigidBody(enemyNode);
+    }
+
+    private resumePausedEnemy() {
+        if (!this.pausedEnemyNode || !this.pausedEnemyNode.isValid) {
+            this.pausedEnemyNode = null;
+            return;
+        }
+
+        const enemy = this.pausedEnemyNode.getComponent("Enemy") as any;
+        if (enemy && enemy.resumeMotion) {
+            enemy.resumeMotion();
+        }
+
+        this.pausedEnemyNode = null;
+    }
+
+    private stopRigidBody(node: cc.Node) {
+        if (!node) {
+            return;
+        }
+
+        const body = node.getComponent(cc.RigidBody);
+        if (!body) {
+            return;
+        }
+
+        body.linearVelocity = cc.v2(0, 0);
+        body.angularVelocity = 0;
     }
 
     private startMovingPlatform() {

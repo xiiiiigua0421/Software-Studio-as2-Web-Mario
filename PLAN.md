@@ -227,7 +227,7 @@ Implemented in TypeScript:
 - Goomba patrols left and right.
 - Goomba falling speed is fixed with `fallSpeed = -70`.
 - Stomping Goomba destroys it.
-- Touching Goomba from the side hurts the player.
+- Touching Goomba from the side pauses both Player and Goomba briefly, then hurts the player.
 - Question block triggers only once when hit from below.
 - Question block activates and positions its mushroom.
 - Mushroom moves right and grows the player when collected.
@@ -425,7 +425,7 @@ Implemented in Markdown:
 - [x] Jump sound effect
 - [x] Death sound effect
 - [ ] Extra sound effects
-- [ ] BGM continues while sound effects play
+- [x] BGM continues while sound effects play
 - [x] Life UI
 - [x] Score UI
 - [x] Timer UI
@@ -446,11 +446,28 @@ Implemented in Markdown:
 
 ## Scoring Focus
 
-- Basic rules: 50%
+- Complete Game Process: 5%
+- Basic Rules: 50%
+  - World Map: 10%
+  - Level Design: 5%
+  - Player: 15%
+  - Enemies: 15%
+  - Question Blocks: 5%
 - Animations: 10%
-- Sound effects: 10%
+  - Player walk and jump animations: 5%
+  - Enemy animations: 2% each, up to 5%
+- Sound Effects: 10%
+  - At least one BGM: 2%
+  - Player jump and die sound effects: 3%
+  - Additional sound effects: 1% each, up to 5%
 - UI: 10%
+  - Player life: 3%
+  - Player score: 5%
+  - Timer: 2%
 - Appearance: 10%
-- Complete game process: 5%
 - Git: 5%
 - Bonus: up to 10%
+  - Firebase: 5%
+  - Leaderboard: 5%
+  - Multiplayer / backend online version: up to 10%
+  - Offline version: 5%
