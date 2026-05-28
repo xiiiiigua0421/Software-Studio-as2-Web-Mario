@@ -3,10 +3,9 @@
 Assignment 02 Web Mario for NTHU Software Studio.
 
 - Engine: Cocos Creator 2.4.8
-- Main project type: Web Mario style platform game
-- Current documentation status: Phase 9 Markdown ready
-- Firebase URL: TODO after Phase 10
-- Final package name: TODO, `Assignment02_StudentID.zip`
+- Game type: Mario-style web platformer
+- Firebase URL: TODO
+- Final package: TODO, `Assignment02_StudentID.zip`
 
 ## Controls
 
@@ -14,86 +13,59 @@ Assignment 02 Web Mario for NTHU Software Studio.
 - Move right: `D` or right arrow
 - Jump: `W`, up arrow, or space
 
-## Gameplay Overview
+## Scoring Focus
 
-The game is a Mario style side-scrolling platformer. The player can move, jump, fall, lose lives, respawn, stomp enemies, hit question blocks, and collect a mushroom power-up. The camera follows the player on the X axis.
-
-## Implemented In TypeScript
-
-- Game process:
-  - Start menu loads level select.
-  - Level select loads the game scene.
-  - Game over can restart the game or return to start menu.
-- Basic rules:
-  - Physics manager is enabled with gravity.
-  - Player movement and jump are controlled by keyboard.
-  - Falling below `deathY` decreases life and respawns the player.
-  - Enemy patrols left and right.
-  - Player can stomp an enemy to defeat it.
-  - Side contact with an enemy hurts the player.
-  - Question block can be hit from below once.
-  - Mushroom appears from the question block and makes the player bigger.
-- Animation hooks:
-  - Player switches between `player_idle`, `player_walk`, and `player_jump`.
-  - Enemy can play `goomba_walk` and optional `goomba_die`.
-- Sound hooks:
-  - BGM uses `cc.audioEngine.playMusic`.
-  - Jump, death, stomp, item appear, and power-up sound effects use `playEffect`.
-- UI hooks:
-  - Life UI format: `LIFE x3`
-  - Score UI format: `SCORE 000000`
-  - Timer UI format: `TIME 000`
-  - Score increases when stomping enemies, hitting question blocks, and collecting power-ups.
-
-## Cocos Editor Setup Still Needed
-
-- Add all scenes to Build Settings:
-  - `Start menu`
-  - `Level select`
-  - `Game scene`
-  - `Game over`
-- Wire menu and game over buttons to their scene controller methods.
-- Build the game scene map with static ground, walls, and platforms.
-- Add and configure Player, Goomba, QuestionBlock, and Mushroom nodes with correct physics components.
-- Create and assign animation clips:
-  - `player_idle`
-  - `player_walk`
-  - `player_jump`
-  - `goomba_walk`
-  - optional `goomba_die`
-- Assign audio clips in Inspector:
-  - BGM
-  - jump
-  - death
-  - stomp
-  - item appear
-  - power up
-- Create UI labels under Canvas and drag them into `GameManager`:
-  - `LifeLabel`
-  - `ScoreLabel`
-  - `TimerLabel`
-
-## Scoring Checklist Summary
-
-Code-side implementation is ready for:
-
-- Complete game process
-- Basic rules
-- Animation hooks
-- Sound effect hooks
-- UI hooks
-- Git version control
-
-Editor-side setup and playtesting are still required before marking these as fully complete for grading.
-
-Not completed yet:
-
-- Firebase deployment
-- Final web build verification
-- Zip packaging
-- MD5 checksum
-- FTP and eeclass submission
+- Complete Game Process
+  - Start menu opens the level select scene.
+  - Level select starts the game scene.
+  - Game scene can end through lives reaching zero or the finish trigger.
+  - Game over scene supports restart and return-to-menu flow.
+- Basic Rules
+  - World Map
+    - One playable side-scrolling map is built.
+    - Gravity is enabled through the Cocos physics manager.
+    - Ground, walls, platforms, player, enemies, blocks, and items use physics colliders.
+    - Camera follows the player on the X axis.
+  - Level Design
+    - Static walls, ground, and platforms are present.
+    - Question block can interact with the player.
+    - Moving platform is implemented with a looping Cocos action.
+  - Player
+    - Player moves left/right and jumps by keyboard.
+    - Player uses a foot sensor for grounded jump detection.
+    - Enemy side contact hurts the player and decreases life.
+    - Falling out of bounds decreases life.
+    - Player respawns at the initial position when lives remain.
+  - Enemies
+    - Goomba has physics, patrol movement, and fixed falling speed.
+    - Player can defeat Goomba only by stomping from above.
+    - Side contact pauses Player and Goomba briefly, then hurts Player.
+  - Question Blocks
+    - Question block triggers once when hit from below.
+    - Mushroom appears from the block.
+    - Mushroom makes Mario bigger after collection.
+- Animations
+  - Player walk and jump animations
+  - Enemy walk, fly, and death animation hooks
+- Sound Effects
+  - BGM hook
+  - Player jump and death sound hooks
+  - Additional sound effects hooks
+- UI
+  - Life display
+  - Score display
+  - Timer display
+  - Final score/time and leaderboard hooks
+- Appearance
+  - Map layout, visual assets, UI placement, and preview polish
+- Git
+  - Project uses Git version control with multiple commits.
+- Bonus
+  - Firebase deployment
+  - Leaderboard
+  - Multiplayer / backend online version
+  - Offline version
 
 ## AI Usage
 
-AI assistance was used during planning, TypeScript implementation, documentation, and commit message drafting. See `AI_reference.md` for the summarized AI usage record.
+AI assistance was used for planning, TypeScript implementation, PLAN.md updates, README writing, and commit message drafting. See `AI_reference.md` for summarized AI usage records.

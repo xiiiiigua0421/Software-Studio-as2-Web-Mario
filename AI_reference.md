@@ -16,7 +16,7 @@ Codex was used to help with:
 - Planning implementation phases.
 - Editing existing TypeScript files for game flow, player control, gameplay rules, animation hooks, sound hooks, and UI hooks.
 - Updating `PLAN.md` after phases.
-- Drafting README and AI reference Markdown.
+- Drafting and updating README and AI reference Markdown.
 - Drafting commit messages and descriptions.
 
 The student remains responsible for:
@@ -40,6 +40,14 @@ The student remains responsible for:
   - Restarts `Game scene`.
 - `assets/Scripts/scenes/GameOver.ts:16`
   - Returns to `Start menu`.
+- `assets/Scripts/scenes/StartMenu.ts:12`
+  - Inspector field for the leaderboard label.
+- `assets/Scripts/scenes/StartMenu.ts:40`
+  - Displays the Top 5 local leaderboard.
+- `assets/Scripts/scenes/GameOver.ts:19`
+  - Inspector field for the final time label.
+- `assets/Scripts/scenes/GameOver.ts:36`
+  - Public `submitScore()` method for the Submit button.
 
 ### Player, Physics, Audio, UI
 
@@ -53,8 +61,14 @@ The student remains responsible for:
   - Checks whether an animation state exists before playing it.
 - `assets/Scripts/PlayerController.ts:185`
   - Plays the selected player animation clip.
+- `assets/Scripts/PlayerController.ts:115`
+  - Pauses player motion during enemy contact.
+- `assets/Scripts/PlayerController.ts:202`
+  - Calls `GameManager.finishLevel()` after finish trigger contact.
 - `assets/Scripts/GameManager.ts:20`
   - Out-of-bounds `deathY` threshold.
+- `assets/Scripts/GameManager.ts:32`
+  - Enemy hit pause delay.
 - `assets/Scripts/GameManager.ts:32`
   - BGM Inspector field.
 - `assets/Scripts/GameManager.ts:35`
@@ -69,6 +83,16 @@ The student remains responsible for:
   - Detects out-of-bounds player fall.
 - `assets/Scripts/GameManager.ts:86`
   - Public `hurtPlayer()` method for enemy damage.
+- `assets/Scripts/GameManager.ts:115`
+  - Public `finishLevel()` method for finish trigger completion.
+- `assets/Scripts/GameManager.ts:161`
+  - Saves final score, time, and finished state to local storage.
+- `assets/Scripts/GameManager.ts:174`
+  - Pauses player motion during enemy contact.
+- `assets/Scripts/GameManager.ts:190`
+  - Resumes the paused enemy after player respawn.
+- `assets/Scripts/GameManager.ts:210`
+  - Starts the optional moving platform action.
 - `assets/Scripts/GameManager.ts:94`
   - Public `addScore(points)` method.
 - `assets/Scripts/GameManager.ts:142`
@@ -88,12 +112,22 @@ The student remains responsible for:
 
 - `assets/Scripts/gameplay/Enemy.ts:16`
   - Inspector field for enemy animation.
+- `assets/Scripts/gameplay/Enemy.ts:13`
+  - Fixed Goomba falling speed.
+- `assets/Scripts/gameplay/Enemy.ts:25`
+  - Goomba fly animation clip name.
 - `assets/Scripts/gameplay/Enemy.ts:31`
   - Enemy score value.
+- `assets/Scripts/gameplay/Enemy.ts:73`
+  - Clamps Goomba falling speed.
 - `assets/Scripts/gameplay/Enemy.ts:86`
   - Adds score after stomping an enemy.
-- `assets/Scripts/gameplay/Enemy.ts:93`
-  - Calls `GameManager.hurtPlayer()` on side contact.
+- `assets/Scripts/gameplay/Enemy.ts:102`
+  - Pauses Goomba before notifying `GameManager` about side contact.
+- `assets/Scripts/gameplay/Enemy.ts:118`
+  - Resumes Goomba movement after player respawn.
+- `assets/Scripts/gameplay/Enemy.ts:153`
+  - Plays the fly animation while Goomba is moving vertically.
 - `assets/Scripts/gameplay/Enemy.ts:133`
   - Plays enemy animation clip.
 - `assets/Scripts/gameplay/Enemy.ts:150`
@@ -120,7 +154,7 @@ The student remains responsible for:
 - `PLAN.md`
   - Records phase status, Codex-owned files, user-owned Cocos GUI setup, and implemented TypeScript behavior.
 - `README.md`
-  - Summarizes the project, controls, implemented features, remaining Editor setup, and submission placeholders.
+  - Summarizes the project, controls, scoring focus, implemented features, remaining work, and AI usage.
 - `AI_reference.md`
   - Records summarized AI usage.
 
@@ -179,6 +213,19 @@ The student remains responsible for:
   - Codex drafted `README.md`.
   - Codex drafted `AI_reference.md` with tool, scope, file references, prompt summaries, response summaries, and modification records.
 
+### Later Gameplay And Documentation Updates
+
+- Prompt summary:
+  - Add finish trigger behavior, final score display, leaderboard/name-input planning, moving platform, Goomba airborne behavior, and enemy-contact pause.
+  - Update `PLAN.md`, `README.md`, and AI reference documentation to match the latest project state.
+- Response summary:
+  - Codex added finish trigger hooks and last-result local storage.
+  - Codex added local leaderboard hooks with name input and score/time sorting.
+  - Codex added Goomba `goomba_fly` hook and fixed falling speed.
+  - Codex added a short pause for Player and Goomba after side enemy contact.
+  - Codex restructured `README.md` around the assignment scoring focus.
+  - Codex updated `PLAN.md` to track remaining Cocos Inspector tasks and scoring progress.
+
 ## Version And Modification Record
 
 - `334279d Set up initial Cocos scenes`
@@ -191,6 +238,20 @@ The student remains responsible for:
   - Animation and audio hooks.
 - `2be8ff4 Add Phase 7 UI hooks for life score and timer`
   - Life, score, and timer UI hooks.
+- `37bae88 fin detect`
+  - Finish trigger detection and game-over transition.
+- `e42dee3 game over score, font wall`
+  - Final score display updates.
+- `917c5e5 moving plat, up score`
+  - Moving platform and score-related updates.
+- `a9103ac Add leaderboard and name input for game over`
+  - Local leaderboard and player name input hooks.
+- `4d3905f Add Goomba airborne animation behavior`
+  - Goomba fly animation and fixed falling speed behavior.
+- `defb660 Pause player and enemy briefly on contact`
+  - Short pause when Player touches an enemy from the side.
+- `5ae9148 Update PLAN.md`
+  - Updated planning checklist and scoring documentation.
 
 ## Notes For Final Submission
 
